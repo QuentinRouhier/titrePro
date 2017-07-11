@@ -10,7 +10,7 @@ class users extends database {
     public $postalCode = '';
     public $birthDate = '01/01/1900';
     public $address = '';
-    public $place = '';
+    public $city = '';
     public $society = '';
     public $email = '';
     public $password = '';
@@ -22,7 +22,7 @@ class users extends database {
     }
 
     public function addUser() {
-        $query = 'INSERT INTO `taxi`.`taxi_users` (`id`, `lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `place`, `society`, `email`, `password`, `id_taxi_group`) VALUES (NULL, UPPER(:lastName), :firstName, REPLACE(:firstPhoneNumber, \'.\',\'\'), REPLACE(:secondPhoneNumber, \'.\',\'\'), :postalCode ,STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), :address, :place, :society, :email, :password, :id_taxi_group)';
+        $query = 'INSERT INTO `taxi`.`taxi_users` (`id`, `lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `email`, `password`, `id_taxi_group`) VALUES (NULL, UPPER(:lastName), :firstName, REPLACE(:firstPhoneNumber, \'.\',\'\'), REPLACE(:secondPhoneNumber, \'.\',\'\'), :postalCode ,STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), :address, :city, :society, :email, :password, :id_taxi_group)';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':lastName', $this->lastName, PDO::PARAM_STR);
         $queryResult->bindValue(':firstName', $this->firstName, PDO::PARAM_STR);
@@ -31,7 +31,7 @@ class users extends database {
         $queryResult->bindValue(':postalCode', $this->postalCode, PDO::PARAM_STR);
         $queryResult->bindValue(':birthDate', $this->birthDate, PDO::PARAM_STR);
         $queryResult->bindValue(':address', $this->address, PDO::PARAM_STR);
-        $queryResult->bindValue(':place', $this->city, PDO::PARAM_STR);
+        $queryResult->bindValue(':city', $this->city, PDO::PARAM_STR);
         $queryResult->bindValue(':society', $this->society, PDO::PARAM_STR);
         $queryResult->bindValue(':email', $this->email, PDO::PARAM_STR);
         $queryResult->bindValue(':password', $this->password, PDO::PARAM_STR);
@@ -62,7 +62,7 @@ class users extends database {
     }
 
     public function getUsers() {
-        $query = 'SELECT `id`,`lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `place`, `society`, `email`, `id_taxi_group` FROM taxi_users WHERE email = :email';
+        $query = 'SELECT `id`,`lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `email`, `id_taxi_group` FROM taxi_users WHERE email = :email';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':email', $this->email, PDO::PARAM_STR);
         $queryResult->execute();
@@ -75,9 +75,41 @@ class users extends database {
         $this->postalCode = $result->postalCode;
         $this->birthDate = $result->birthDate;
         $this->address = $result->address;
-        $this->place = $result->place;
+        $this->city = $result->city;
         $this->society = $result->society;
         $this->id_taxi_group = $result->id_taxi_group;
     }
-
+    public function checkUser() {
+        $select = 'SELECT COUNT(*) AS `exists` FROM `taxi_users` WHERE `email` = :email';
+        $queryPrepare = $this->pdo->prepare($select);
+        $queryPrepare->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $queryPrepare->execute();
+        $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
+        return $result->exists;
+    }
+    
+    public function deleteUser() {
+        $query = 'DELETE FROM `taxi_users` WHERE `id` = :id';
+        $queryResult = $this->pdo->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
+    public function updateUser() {
+        $query = 'UPDATE `taxi_users` SET `lastName` = UPPER(:lastName), `firstName` = :firstName, `firstPhoneNumber` = REPLACE(:firstPhoneNumber, \'.\',\'\'), `secondPhoneNumber` = REPLACE(:secondPhoneNumber, \'.\',\'\'), `postalCode` = :postalCode, `birthDate` = STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), `address` = :address, `city` = :city, `society` = :society, `email` = :email, `password` = :password, `id_taxi_group` = :id_taxi_group WHERE id = :id';
+        $queryResult = $this->pdo->prepare($query);
+        $queryResult->bindValue(':lastName', $this->lastName, PDO::PARAM_STR);
+        $queryResult->bindValue(':firstName', $this->firstName, PDO::PARAM_STR);
+        $queryResult->bindValue(':firstPhoneNumber', $this->firstPhoneNumber, PDO::PARAM_STR);
+        $queryResult->bindValue(':secondPhoneNumber', $this->secondPhoneNumber, PDO::PARAM_STR);
+        $queryResult->bindValue(':postalCode', $this->postalCode, PDO::PARAM_STR);
+        $queryResult->bindValue(':birthDate', $this->birthDate, PDO::PARAM_STR);
+        $queryResult->bindValue(':address', $this->address, PDO::PARAM_STR);
+        $queryResult->bindValue(':city', $this->city, PDO::PARAM_STR);
+        $queryResult->bindValue(':society', $this->society, PDO::PARAM_STR);
+        $queryResult->bindValue(':email', $this->email, PDO::PARAM_STR);
+        $queryResult->bindValue(':password', $this->password, PDO::PARAM_STR);
+        $queryResult->bindValue(':id_taxi_group', $this->id_taxi_group, PDO::PARAM_INT);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
 }

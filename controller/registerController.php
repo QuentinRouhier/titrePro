@@ -29,6 +29,9 @@ if (isset($_POST['search'])) {
         if (isset($_POST['group'])) {
             $users->id_taxi_group = strip_tags($_POST['group']);
         }
+        if(!empty($_SESSION)){
+            $users->id = intval($_SESSION['id']);
+        }
         if (isset($_POST['group']) && $_POST['group'] == 1) {
             if (!empty($_POST['society'])) {
                 $users->society = strip_tags($_POST['society']);
@@ -104,6 +107,10 @@ if (isset($_POST['search'])) {
             $users->email = strip_tags($_POST['email']);
             if (!preg_match($regexEmail, $users->email)) {
                 $errorList['email'] = REGISTER_ERROR_ADDRESS;
+            } else {
+                if(empty($_SESSION) && $users->checkUser() == 1) {
+                    $errorList['email'] = REGISTER_DUPLICATE_ADDRESS;
+                } 
             }
         } else {
             $errorList['email'] = REGISTER_EMPTY_VALUE;
@@ -119,12 +126,32 @@ if (isset($_POST['search'])) {
         }
         //On compte le nombre de lignes pour savoir si il y a eu une erreur dans la saisie
         if (count($errorList) == 0) {
+            if (!empty($_SESSION)) {
 //Si PDO renvoie une erreur on le signale à l'utilisateur
-            if (!$users->addUser()) {
-                $message = REGISTER_ERROR_SEND;
+                if (!$users->updateUser()) {
+                    $message = REGISTER_ERROR_UPDATE;
+                } else {
+                    $message = REGISTER_SUCCESS_UPDATE;
+                    header('Location: index.php');
+                    exit;
+                }
             } else {
-                $message = REGISTER_SUCCESS_SEND;
+                if (!$users->addUser()) {
+                    $message = REGISTER_ERROR_SEND;
+                } else {
+                    $message = REGISTER_SUCCESS_SEND;
+                    header('Location: index.php');
+                    exit;
+                }
             }
         }
+    }
+    if (isset($_POST['delete'])) {
+        $users->id = intval($_SESSION['id']);
+        $users->deleteUser();
+        session_unset();
+        session_destroy();
+        header('Location: index.php');
+        exit;
     }
 }

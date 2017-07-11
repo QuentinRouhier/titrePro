@@ -29,14 +29,33 @@ define('REGISTER_ERROR_LASTNAME','Le nom que vous avez renseigné est invalide.V
 define('REGISTER_ERROR_FIRSTNAME','Le prénom que vous avez renseigné est invalide. Veuillez n\'utiliser que des lettre');
 define('REGISTER_ERROR_BIRTHDATE','La date de naissance que vous avez renseignée est invalide. Veuillez respecter jj/mm/AAAA');
 define('REGISTER_ERROR_ADDRESS','L\'adresse que vous avez renseignée est invalide');
+define('REGISTER_DUPLICATE_ADDRESS','L\'adresse que vous avez renseignée est déjà enregistré');
 define('REGISTER_ERROR_POSTALCODE','Le code postal que vous avez renseigné est invalide. Il doit comporter 5 chiffres ou au moins 4 chiffres');
 define('REGISTER_ERROR_PHONENUMBER','Le numéro de téléphone que vous avez renseigné est invalide. Veuillez respecter 0X.XX.XX.XX.XX');
 define('REGISTER_ERROR_SERVICENAME','Wrong!');
 define('REGISTER_ERROR_SEND','Erreur durant l\'ajout de l\'utilisateur');
+define('REGISTER_ERROR_UPDATE','Erreur durant la modification de l\'utilisateur');
 define('REGISTER_SUCCESS_SEND','L\'utilisateur a bien été ajouté');
+define('REGISTER_SUCCESS_UPDATE','L\'utilisateur a bien été modifié');
 define('REGISTER_EMPTY_VALUE','Veuillez remplir le champ');
 define('REGISTER_RETURN','Retour');
 define('REGISTER_ERROR','Erreur!!!');
 define('REGISTER_SUCCESS_MODIFY','L\'utilisateur a bien été modifié');
 define('REGISTER_ERROR_MODIFY','Erreur durant la modification');
 define('REGISTER_ERROR_PASSWORD','Vos mots de passe de sont pas identique');
+
+
+define('USER_DISCONNECT','Bonjour, et bienvenu(e) sur Reservez-un-taxi.fr, veuillez vous authentifier pour poursuivre.');
+define('USER_CONNECT','Réservez votre taxi.');
+
+define('DELETE','Supprimer');
+define('UPDATE','Modifier');
+
+define('SIGN_UP','Inscription');
+define('SIGN_IN','Connexion');
+define('LOG_OUT','Déconnexion');
+define('EDIT','Profil');
+
+define('DEPARTURE','Départ : *');
+define('ARRIVAL','Arrivé : *');
+
