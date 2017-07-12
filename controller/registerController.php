@@ -21,6 +21,7 @@ if (isset($_POST['search'])) {
     $regexPostalCode = '/^[0-9]{5}$/i';
     $regexEmail = '/^[\w\-\.]+[a-z0-9]@[\w\-\.]+[a-z0-9]\.[a-z]{2,}/i';
     $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- ]){3,100}$/i';
+    $regexMax150Characters = '/^(.){3,500}$/i';                   
     $userError = false;
     //déclaration d'un tableau d'erreur
     $errorList = array();
@@ -41,8 +42,17 @@ if (isset($_POST['search'])) {
             } else {
                 $errorList['society'] = REGISTER_EMPTY_VALUE;
             }
+            if (!empty($_POST['describeSociety'])) {
+                $users->describeSociety = strip_tags($_POST['describeSociety']);
+                if (!preg_match($regexMax150Characters, $users->describeSociety)) {
+                    $errorList['describeSociety'] = REGISTER_ERROR_DESCRIBESOCIETY;
+                }
+            } else {
+                $errorList['describeSociety'] = REGISTER_EMPTY_VALUE;
+            }
         } else {
             $users->society = NULL;
+            $users->describeSociety = NULL;
         }
         if (!empty($_POST['lastName'])) {
             $users->lastName = strip_tags($_POST['lastName']);

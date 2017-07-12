@@ -9,6 +9,7 @@
 define('REGISTER_TITLE','Inscription d\'un nouvel utilisateur');
 define('REGISTER_GROUP','Vous êtes : *');
 define('REGISTER_SOCIETY','Votre société : *');
+define('REGISTER_DESCRIBE_SOCIETY','Décrire votre société : *');
 define('REGISTER_LASTNAME','Nom : *');
 define('REGISTER_FIRSTNAME','Prénom : *');
 define('REGISTER_BIRTHDATE','Date de naissance : *');
@@ -25,13 +26,14 @@ define('REGISTER_CONFIRMPASSWORD','Répétez votre mot de passe : *');
 define('REGISTER_REGISTER','Enregistrer');
 
 define('REGISTER_ERROR_SOCIETY','La société que vous avez renseigné est invalide. Veuillez n\utiliser que des chiffres et des lettres ne depasent pas 100 caractères et moins de 3.');
+define('REGISTER_ERROR_DESCRIBESOCIETY','La déscription que vous avez renseigné est invalide. Veuillez n\utiliser que des chiffres et des lettres ne depasent pas 150 caractères et moins de 3.');
 define('REGISTER_ERROR_LASTNAME','Le nom que vous avez renseigné est invalide.Veuillez n\'utiliser que des lettres');
 define('REGISTER_ERROR_FIRSTNAME','Le prénom que vous avez renseigné est invalide. Veuillez n\'utiliser que des lettre');
 define('REGISTER_ERROR_BIRTHDATE','La date de naissance que vous avez renseignée est invalide. Veuillez respecter jj/mm/AAAA');
 define('REGISTER_ERROR_ADDRESS','L\'adresse que vous avez renseignée est invalide');
 define('REGISTER_DUPLICATE_ADDRESS','L\'adresse que vous avez renseignée est déjà enregistré');
 define('REGISTER_ERROR_POSTALCODE','Le code postal que vous avez renseigné est invalide. Il doit comporter 5 chiffres ou au moins 4 chiffres');
-define('REGISTER_ERROR_PHONENUMBER','Le numéro de téléphone que vous avez renseigné est invalide. Veuillez respecter 0X.XX.XX.XX.XX');
+define('REGISTER_ERROR_PHONENUMBER','Le numéro de téléphone que vous avez renseigné est invalide. Veuillez respecter 0X.XX.XX.XX.XX. Vous ne pouvez pas commencer par 00.XX.XX.XX.XX.');
 define('REGISTER_ERROR_SERVICENAME','Wrong!');
 define('REGISTER_ERROR_SEND','Erreur durant l\'ajout de l\'utilisateur');
 define('REGISTER_ERROR_UPDATE','Erreur durant la modification de l\'utilisateur');
@@ -58,4 +60,5 @@ define('EDIT','Profil');
 
 define('DEPARTURE','Départ : *');
 define('ARRIVAL','Arrivé : *');
+define('BOOKING','Réservation');
 

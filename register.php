@@ -66,8 +66,15 @@ include_once 'controller/registerController.php';
                 <div class="row form-group <?= isset($errorList['society']) ? 'has-error' : '' ?>" id="divSociety">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="society"><?= REGISTER_SOCIETY ?></label>
                     <div class="col-sm-4 ">
-                        <input type="text" class="form-control" name="society" id="society" value="<?= !empty($_SESSION) ? $_SESSION['society'] : $users->society ?>" maxlength="100" <?= isset($errorList['group']) == 1 ? 'required' : '' ?>>
+                        <input type="text" class="form-control" name="society" id="society" value="<?= !empty($_SESSION) ? $_SESSION['society'] : $users->society ?>" maxlength="100" minlength="3" <?= isset($errorList['group']) == 1 ? 'required' : '' ?>>
                         <p class="help-block"><?= isset($errorList['society']) ? $errorList['society'] : '' ?></p>
+                    </div>
+                </div>
+                <div class="row form-group <?= isset($errorList['describeSociety']) ? 'has-error' : '' ?>" id="divDescribeSociety">
+                    <label class="control-label col-sm-offset-3  col-sm-2" for="describeSociety"><?= REGISTER_DESCRIBE_SOCIETY ?></label>
+                    <div class="col-sm-4 ">
+                        <textarea class="form-control" rows="5" name="describeSociety" id="describeSociety"  maxlength="500" minlength="3" <?= isset($errorList['group']) == 1 ? 'required' : '' ?>><?= !empty($_SESSION) ? $_SESSION['describeSociety'] : $users->describeSociety ?></textarea>
+                        <p class="help-block"><?= isset($errorList['describeSociety']) ? $errorList['describeSociety'] : '' ?></p>
                     </div>
                 </div>
                 <div class="row form-group">
@@ -87,7 +94,7 @@ include_once 'controller/registerController.php';
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="firstPhoneNumber"><?= REGISTER_FIRSTPHONENUMBER ?></label>
                     <div class="col-sm-4 <?= isset($errorList['firstPhoneNumber']) ? 'has-error' : '' ?>">
-                        <input type="text" class="form-control" name="firstPhoneNumber" id="firstPhoneNumber" value="<?= !empty($_SESSION) ? $_SESSION['firstPhoneNumber'] : $users->firstPhoneNumber ?>" required data-mask="09.99.99.99.99">
+                        <input type="text" class="form-control" name="firstPhoneNumber" id="firstPhoneNumber" value="<?= !empty($_SESSION) ? chunk_split($_SESSION['firstPhoneNumber'], 2, '.') : $users->firstPhoneNumber ?>" required data-mask="09.99.99.99.99">
                         <p class="help-block"><?= isset($errorList['firstPhoneNumber']) ? $errorList['firstPhoneNumber'] : '' ?></p>
                     </div>
                 </div>
@@ -123,7 +130,7 @@ include_once 'controller/registerController.php';
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="birthDate"><?= REGISTER_BIRTHDATE ?></label>
                     <div class="col-sm-4 <?= isset($errorList['birthDate']) ? 'has-error' : '' ?>">
-                        <input type="text" data-provide="datepicker" class="form-control datepicker" name="birthDate" id="birthDate" value="<?= !empty($_SESSION) ? $_SESSION['birthDate'] : $users->birthDate ?>" required data-mask="99/99/9999">
+                        <input type="text" data-provide="datepicker" class="form-control datepicker" name="birthDate" id="birthDate" value="<?= !empty($_SESSION) ? date_format(date_create($_SESSION['birthDate']), 'd/m/Y') : $users->birthDate ?>" required data-mask="99/99/9999">
                         <p class="help-block"><?= isset($errorList['birthDate']) ? $errorList['birthDate'] : '' ?></p>
                     </div>
                 </div>
@@ -147,6 +154,7 @@ include_once 'controller/registerController.php';
                         <p class="help-block"><?= isset($errorList['confirmPassword']) ? $errorList['confirmPassword'] : '' ?></p>
                     </div>
                 </div>
+                <hr>
                 <div class="row form-group col-md-offset-4 col-md-4">
                     <?php
                     if (!empty($_SESSION)) {

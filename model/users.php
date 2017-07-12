@@ -12,6 +12,7 @@ class users extends database {
     public $address = '';
     public $city = '';
     public $society = '';
+    public $describeSociety = '';
     public $email = '';
     public $password = '';
     public $id_taxi_group = 0;
@@ -22,7 +23,7 @@ class users extends database {
     }
 
     public function addUser() {
-        $query = 'INSERT INTO `taxi`.`taxi_users` (`id`, `lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `email`, `password`, `id_taxi_group`) VALUES (NULL, UPPER(:lastName), :firstName, REPLACE(:firstPhoneNumber, \'.\',\'\'), REPLACE(:secondPhoneNumber, \'.\',\'\'), :postalCode ,STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), :address, :city, :society, :email, :password, :id_taxi_group)';
+        $query = 'INSERT INTO `taxi_users` (`id`, `lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `describeSociety`, `email`, `password`, `id_taxi_group`) VALUES (NULL, UPPER(:lastName), :firstName, REPLACE(:firstPhoneNumber, \'.\',\'\'), REPLACE(:secondPhoneNumber, \'.\',\'\'), :postalCode ,STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), :address, :city, :society, :describeSociety, :email, :password, :id_taxi_group)';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':lastName', $this->lastName, PDO::PARAM_STR);
         $queryResult->bindValue(':firstName', $this->firstName, PDO::PARAM_STR);
@@ -33,6 +34,7 @@ class users extends database {
         $queryResult->bindValue(':address', $this->address, PDO::PARAM_STR);
         $queryResult->bindValue(':city', $this->city, PDO::PARAM_STR);
         $queryResult->bindValue(':society', $this->society, PDO::PARAM_STR);
+        $queryResult->bindValue(':describeSociety', $this->describeSociety, PDO::PARAM_STR);
         $queryResult->bindValue(':email', $this->email, PDO::PARAM_STR);
         $queryResult->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryResult->bindValue(':id_taxi_group', $this->id_taxi_group, PDO::PARAM_INT);
@@ -62,7 +64,7 @@ class users extends database {
     }
 
     public function getUsers() {
-        $query = 'SELECT `id`,`lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `email`, `id_taxi_group` FROM taxi_users WHERE email = :email';
+        $query = 'SELECT `id`,`lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `describeSociety`, `email`, `id_taxi_group` FROM taxi_users WHERE email = :email';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':email', $this->email, PDO::PARAM_STR);
         $queryResult->execute();
@@ -77,6 +79,7 @@ class users extends database {
         $this->address = $result->address;
         $this->city = $result->city;
         $this->society = $result->society;
+        $this->describeSociety = $result->describeSociety;
         $this->id_taxi_group = $result->id_taxi_group;
     }
     public function checkUser() {
@@ -95,7 +98,7 @@ class users extends database {
         return $queryResult->execute();
     }
     public function updateUser() {
-        $query = 'UPDATE `taxi_users` SET `lastName` = UPPER(:lastName), `firstName` = :firstName, `firstPhoneNumber` = REPLACE(:firstPhoneNumber, \'.\',\'\'), `secondPhoneNumber` = REPLACE(:secondPhoneNumber, \'.\',\'\'), `postalCode` = :postalCode, `birthDate` = STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), `address` = :address, `city` = :city, `society` = :society, `email` = :email, `password` = :password, `id_taxi_group` = :id_taxi_group WHERE id = :id';
+        $query = 'UPDATE `taxi_users` SET `lastName` = UPPER(:lastName), `firstName` = :firstName, `firstPhoneNumber` = REPLACE(:firstPhoneNumber, \'.\',\'\'), `secondPhoneNumber` = REPLACE(:secondPhoneNumber, \'.\',\'\'), `postalCode` = :postalCode, `birthDate` = STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), `address` = :address, `city` = :city, `society` = :society, `describeSociety` = :describeSociety, `email` = :email, `password` = :password, `id_taxi_group` = :id_taxi_group WHERE id = :id';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':lastName', $this->lastName, PDO::PARAM_STR);
         $queryResult->bindValue(':firstName', $this->firstName, PDO::PARAM_STR);
@@ -106,6 +109,7 @@ class users extends database {
         $queryResult->bindValue(':address', $this->address, PDO::PARAM_STR);
         $queryResult->bindValue(':city', $this->city, PDO::PARAM_STR);
         $queryResult->bindValue(':society', $this->society, PDO::PARAM_STR);
+        $queryResult->bindValue(':describeSociety', $this->describeSociety, PDO::PARAM_STR);
         $queryResult->bindValue(':email', $this->email, PDO::PARAM_STR);
         $queryResult->bindValue(':password', $this->password, PDO::PARAM_STR);
         $queryResult->bindValue(':id_taxi_group', $this->id_taxi_group, PDO::PARAM_INT);

@@ -20,6 +20,7 @@
            $_SESSION['address'] = $users->address;
            $_SESSION['city'] = $users->city;
            $_SESSION['society'] = $users->society;
+           $_SESSION['describeSociety'] = $users->describeSociety;
            $_SESSION['id_taxi_group'] = $users->id_taxi_group;
        }
    }

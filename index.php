@@ -113,6 +113,9 @@ include_once 'controller/indexController.php';
                                 <input type="text" class="form-control" name="arrival" id="arrival" value="">
                             </div>
                         </div>
+                        <div class="col-sm-offset-5 col-sm-2">
+                        <input type="submit" name="delete" id="booking" value="<?= BOOKING ?>" class="form-control"/>
+                        </div>
                     </form>
                 <?php } ?>
             </div>
