@@ -1,7 +1,18 @@
 <?php
 
+/**
+ * Modèle de la table users.
+ * Ce modèle est la réplique de la table.
+ * Ici je la déclare
+ * Le mot clé extends permet de dire que la classe users hérite de la classe database
+ */
 class users extends database {
 
+    /**
+     * Déclaration des champs de la table en attribut.
+     * Dans une classe les variables globales sont appelées attributs
+     * @var type 
+     */
     public $id = 0;
     public $firstName = '';
     public $lastName = '';
@@ -17,11 +28,18 @@ class users extends database {
     public $password = '';
     public $id_taxi_group = 0;
 
+    /**
+     * Déclaration de la méthode magique construct.
+     * Le constructeur de la classe est appelé avec le mot clé new.
+     */
     public function __construct() {
         parent::__construct();
         $this->connectDB();
     }
 
+    /**
+     * Methode permetant d'ajouter un utilisateur.
+     */
     public function addUser() {
         $query = 'INSERT INTO `taxi_users` (`id`, `lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `describeSociety`, `email`, `password`, `id_taxi_group`) VALUES (NULL, UPPER(:lastName), :firstName, REPLACE(:firstPhoneNumber, \'.\',\'\'), REPLACE(:secondPhoneNumber, \'.\',\'\'), :postalCode ,STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), :address, :city, :society, :describeSociety, :email, :password, :id_taxi_group)';
         $queryResult = $this->pdo->prepare($query);
@@ -41,6 +59,9 @@ class users extends database {
         return $queryResult->execute();
     }
 
+    /**
+     * méthode permettant de récupérer le hash en fonction du login
+     */
     public function getHashByUser() {
         $isOk = false;
         $query = 'SELECT `password` FROM `taxi_users` WHERE `email` = :email';
@@ -63,6 +84,9 @@ class users extends database {
         return $isOk;
     }
 
+    /**
+     * méthode permettant de selectionner un utilisateur.
+     */
     public function getUsers() {
         $query = 'SELECT `id`,`lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `postalCode`, `birthDate`, `address`, `city`, `society`, `describeSociety`, `email`, `id_taxi_group` FROM taxi_users WHERE email = :email';
         $queryResult = $this->pdo->prepare($query);
@@ -82,6 +106,10 @@ class users extends database {
         $this->describeSociety = $result->describeSociety;
         $this->id_taxi_group = $result->id_taxi_group;
     }
+
+    /**
+     * méthode permettant de verifier si un email existe deja.
+     */
     public function checkUser() {
         $select = 'SELECT COUNT(*) AS `exists` FROM `taxi_users` WHERE `email` = :email';
         $queryPrepare = $this->pdo->prepare($select);
@@ -90,13 +118,20 @@ class users extends database {
         $result = $queryPrepare->fetch(PDO::FETCH_OBJ);
         return $result->exists;
     }
-    
+
+    /**
+     * méthode permettant de supprimer un utilisateur par rapport a son id.
+     */
     public function deleteUser() {
         $query = 'DELETE FROM `taxi_users` WHERE `id` = :id';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryResult->execute();
     }
+
+    /**
+     * méthode permettant de modifier un utilisateur.
+     */
     public function updateUser() {
         $query = 'UPDATE `taxi_users` SET `lastName` = UPPER(:lastName), `firstName` = :firstName, `firstPhoneNumber` = REPLACE(:firstPhoneNumber, \'.\',\'\'), `secondPhoneNumber` = REPLACE(:secondPhoneNumber, \'.\',\'\'), `postalCode` = :postalCode, `birthDate` = STR_TO_DATE(:birthDate, \'%d/%m/%Y\'), `address` = :address, `city` = :city, `society` = :society, `describeSociety` = :describeSociety, `email` = :email, `password` = :password, `id_taxi_group` = :id_taxi_group WHERE id = :id';
         $queryResult = $this->pdo->prepare($query);
@@ -116,4 +151,5 @@ class users extends database {
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         return $queryResult->execute();
     }
+
 }

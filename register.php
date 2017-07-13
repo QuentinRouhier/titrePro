@@ -13,7 +13,7 @@ include_once 'controller/registerController.php';
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>Inscription</title>
+        <title><?= !empty($_SESSION) ? 'Profil' : 'Inscription' ?></title>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--Css du datepicker-->
         <link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css"/>
@@ -40,7 +40,7 @@ include_once 'controller/registerController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="index.php" class="btn btn-success navbar-btn" >Résérvtion</a>
+                        <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
                     </ul>
                 </div>
             </div>
@@ -56,7 +56,7 @@ include_once 'controller/registerController.php';
                             <?php
                             foreach ($groupList as $groups) {
                                 ?>     
-                                <option value="<?= $groups->id ?>" <?= $groups->id == $users->id_taxi_group ? 'selected' : '' ?>><?= $groups->name ?></option>
+                                <option value="<?= $groups->id ?>" <?= !empty($_SESSION) ? ($groups->id == $_SESSION['id_taxi_group'] ? 'selected' : '' ) : ($groups->id == $users->id_taxi_group ? 'selected' : ''); ?>><?= $groups->name ?></option>
                                 <?php
                             }
                             ?>
@@ -94,14 +94,14 @@ include_once 'controller/registerController.php';
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="firstPhoneNumber"><?= REGISTER_FIRSTPHONENUMBER ?></label>
                     <div class="col-sm-4 <?= isset($errorList['firstPhoneNumber']) ? 'has-error' : '' ?>">
-                        <input type="text" class="form-control" name="firstPhoneNumber" id="firstPhoneNumber" value="<?= !empty($_SESSION) ? chunk_split($_SESSION['firstPhoneNumber'], 2, '.') : $users->firstPhoneNumber ?>" required data-mask="09.99.99.99.99">
+                        <input type="text" class="form-control" name="firstPhoneNumber" id="firstPhoneNumber" value="<?= !empty($_SESSION) ? wordwrap($_SESSION['firstPhoneNumber'], 2, '.', 1) : $users->firstPhoneNumber ?>" required data-mask="09.99.99.99.99">
                         <p class="help-block"><?= isset($errorList['firstPhoneNumber']) ? $errorList['firstPhoneNumber'] : '' ?></p>
                     </div>
                 </div>
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="secondPhoneNumber"><?= REGISTER_SECONDPHONENUMBER ?></label>
                     <div class="col-sm-4 <?= isset($errorList['secondPhoneNumber']) ? 'has-error' : '' ?>">
-                        <input type="text" class="form-control" name="secondPhoneNumber" id="secondPhoneNumber" value="<?= !empty($_SESSION) ? $_SESSION['secondPhoneNumber'] : $users->secondPhoneNumber ?>" data-mask="09.99.99.99.99">
+                        <input type="text" class="form-control" name="secondPhoneNumber" id="secondPhoneNumber" value="<?= !empty($_SESSION) ? wordwrap($_SESSION['secondPhoneNumber'], 2, '.', 1) : $users->secondPhoneNumber ?>" data-mask="09.99.99.99.99">
                         <p class="help-block"><?= isset($errorList['secondPhoneNumber']) ? $errorList['secondPhoneNumber'] : '' ?></p>
 
                     </div>
@@ -116,7 +116,17 @@ include_once 'controller/registerController.php';
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="city"><?= REGISTER_CITY ?></label>
                     <div class="col-sm-4 <?= isset($errorList['city']) ? 'has-error' : '' ?>">
-                        <select type="text" class="form-control" name="city" id="city" ></select>
+                        <select type="text" class="form-control" name="city" id="city" >
+                            <?php
+                            if (isset($_SESSION['id'])) {
+                                foreach ($locationsList as $locationsDetails) {
+                                    ?>
+                                    <option value="<?= $locationsDetails->city ?>" <?= $locationsDetails->city == $_SESSION['city'] ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
+                                    <?php
+                                }
+                            }
+                            ?>
+                        </select>
                         <p class="help-block"><?= isset($errorList['city']) ? $errorList['city'] : '' ?></p>
                     </div>
                 </div>

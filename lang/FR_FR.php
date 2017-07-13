@@ -56,9 +56,11 @@ define('UPDATE','Modifier');
 define('SIGN_UP','Inscription');
 define('SIGN_IN','Connexion');
 define('LOG_OUT','Déconnexion');
+define('CLOSE','Fermer');
 define('EDIT','Profil');
 
 define('DEPARTURE','Départ : *');
 define('ARRIVAL','Arrivé : *');
 define('BOOKING','Réservation');
 
+define('LOGINE','Les données saisi sont incorrect');

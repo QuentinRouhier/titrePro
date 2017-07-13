@@ -13,8 +13,7 @@ include_once 'controller/indexController.php';
         <title>taxi</title>
         <meta charset="UTF-8"/>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-        <script src="assets/js/bootstrap.js" type="text/javascript"></script>
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>     
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -66,12 +65,13 @@ include_once 'controller/indexController.php';
                     </div>
                     <form action="index.php" method="POST">
                         <div class="modal-body">
-                        <div class="row form-group">
-                            <label class="control-label col-sm-2" for="email"><?= REGISTER_EMAIL ?></label>
-                            <div class="col-sm-9">
-                                <input type="email" class="form-control" name="email" id="email" value="<?= $users->email ?>" required>
+                            <span id="errorLogin"><?= LOGINE ?></span>
+                            <div class="row form-group">
+                                <label class="control-label col-sm-2" for="email"><?= REGISTER_EMAIL ?></label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" name="email" id="email" value="<?= $users->email ?>" required>
+                                </div>
                             </div>
-                        </div>
                             <div class="row form-group">
                                 <label class="control-label col-sm-2" for="password"><?= REGISTER_PASSWORD ?></label>
                                 <div class="col-sm-9">
@@ -80,8 +80,8 @@ include_once 'controller/indexController.php';
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" name="longIn" class="btn btn-primary"><?= SIGN_IN ?></button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal"><?= CLOSE ?></button>
+                            <button type="button" id="buttonLogIn" name="longIn" class="btn btn-primary"><?= SIGN_IN ?></button>
                         </div>
                     </form>
                 </div>
@@ -92,6 +92,7 @@ include_once 'controller/indexController.php';
                 <?php if (empty($_SESSION)) {
                     ?> 
                     <div id="home" >
+                        <p><?= $message ?> </p>
                         <h1><?= USER_DISCONNECT ?></h1>
                         <a href="register.php" class="btn btn-success btn-lg"><?= SIGN_UP ?></a>
                         <button data-toggle="modal" data-target="#ModalConnexion" class="btn btn-primary btn-lg"><?= SIGN_IN ?></button>    
@@ -114,11 +115,12 @@ include_once 'controller/indexController.php';
                             </div>
                         </div>
                         <div class="col-sm-offset-5 col-sm-2">
-                        <input type="submit" name="delete" id="booking" value="<?= BOOKING ?>" class="form-control"/>
+                            <input type="submit" name="delete" id="booking" value="<?= BOOKING ?>" class="form-control"/>
                         </div>
                     </form>
                 <?php } ?>
             </div>
         </div>
+        <script src="assets/js/login.js" type="text/javascript"></script>
     </body>
 </html>
