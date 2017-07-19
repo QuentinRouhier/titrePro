@@ -6,7 +6,7 @@ if (!empty($_SESSION)) {
     $location = new location();
     //appel de la méthode getPostalCodeBySearch pour pouvoir construire la liste déroulante
     // et afficher le bon code postal lors de la modification du profil
-    $locationsList = $location->getPostalCodeBySearch($_SESSION['postalCode']);
+    $locationsListt = $location->getListLocation($_SESSION['id_taxi_location']);
 }
 
 
@@ -140,10 +140,8 @@ if (isset($_POST['search'])) {
         }
         // Si l'input n'est pas vide
         if (!empty($_POST['postalCode'])) {
-            // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-            $users->postalCode = strip_tags($_POST['postalCode']);
             //Si la regex ne match pas
-            if (!preg_match($regexPostalCode, $users->postalCode)) {
+            if (!preg_match($regexPostalCode, $_POST['postalCode'])) {
                 //Tu mets une erreur
                 $errorList['postalCode'] = REGISTER_ERROR_POSTALCODE;
             }
@@ -154,7 +152,7 @@ if (isset($_POST['search'])) {
         // Si l'input n'est pas vide
         if (!empty($_POST['city'])) {
             // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-            $users->city = strip_tags($_POST['city']);
+            $users->id_taxi_location = strip_tags($_POST['city']);
             //Sinon tu mets une erreur
         } else {
             $errorList['city'] = REGISTER_EMPTY_VALUE;
@@ -222,16 +220,16 @@ if (isset($_POST['search'])) {
                 } else
                     header('Location: index.php?modification_reussite');
                 exit;
-            }
-        } else {
-            //Si PDO renvoie une erreur on le signale à l'utilisateur
-            if (!$users->addUser()) {
-                //Tu affiche une erreur
-                $message = REGISTER_ERROR_SEND;
-                //Sinon tu redirige la page sur l'index
-            } else {
-                header('Location: index.php?message_reussite');
-                exit;
+            }else {
+                //Si PDO renvoie une erreur on le signale à l'utilisateur
+                if (!$users->addUser()) {
+                    //Tu affiche une erreur
+                    $message = REGISTER_ERROR_SEND;
+                    //Sinon tu redirige la page sur l'index
+                } else {
+                    header('Location: index.php?message_reussite');
+                    exit;
+                }
             }
         }
     }
@@ -246,6 +244,6 @@ if (isset($_POST['delete'])) {
     session_unset();
     session_destroy();
     //Tu la redirige sur l'index
-    header('Location: index.php');
+    header('Location: /accueil');
     exit;
 }

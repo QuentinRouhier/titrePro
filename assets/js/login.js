@@ -18,7 +18,7 @@ $(function () {
                         if(error == true){
                             $('#errorLogin').show();
                         }else if(error == false){
-                            window.location.href = 'index.php';
+                            window.location.href = '/index.php';
                         }
                     },
                     'JSON');

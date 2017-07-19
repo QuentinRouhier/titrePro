@@ -57,10 +57,18 @@ define('SIGN_UP','Inscription');
 define('SIGN_IN','Connexion');
 define('LOG_OUT','Déconnexion');
 define('CLOSE','Fermer');
+define('MY_BOOKING','Mes réservation');
 define('EDIT','Profil');
 
 define('DEPARTURE','Départ : *');
 define('ARRIVAL','Arrivé : *');
+define('TIME_ARRIVAL','Heure d\'arrivé :*');
+define('DATE_DEPARTURE','Date:*');
 define('BOOKING','Réservation');
 
 define('LOGINE','Les données saisi sont incorrect');
+
+define('BOOKING_EMPTY_VALUE','Veuillez remplir le champ');
+define('BOOKING_ERROR_PLACE_DEPARTURE','L\'adresse doit comporter au moins 2 lettres et maximum 100');
+define('BOOKING_ERROR_ARRIVAL_POINT','L\'adresse doit comporter au moins 2 lettres et maximum 100');
+define('BOOKING_ERROR','Erreur durant la réservation.');

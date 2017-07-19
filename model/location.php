@@ -31,4 +31,10 @@ class location extends database {
         $queryResult->execute();
         return $queryResult->fetchAll(PDO::FETCH_OBJ);
     }
+    public function getListLocation($locationId) {
+        $queryResult = $this->pdo->prepare('SELECT `t_lct`.`postalCode`,`t_lct`.`city` FROM `taxi_location` AS `t_lct` INNER JOIN `taxi_users` AS `t_usr` ON `t_lct`.`id` = `t_usr`.`id_taxi_location` WHERE `t_usr`.`id_taxi_location` = :locationId');
+        $queryResult->bindValue(':locationId',$locationId,PDO::PARAM_INT);
+        $queryResult->execute();
+        return $queryResult->fetch(PDO::FETCH_OBJ);
+    }
 }

@@ -109,7 +109,7 @@ include_once 'controller/registerController.php';
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="postalCode"><?= REGISTER_POSTALCODE ?></label>
                     <div class="col-sm-4 <?= isset($errorList['postalCode']) ? 'has-error' : '' ?>">
-                        <input autocomplete="off" list="postal_code" type="text" class="form-control" name="postalCode" id="postalCode" value="<?= !empty($_SESSION) ? $_SESSION['postalCode'] : $users->postalCode ?>" minlength="5" maxlength="5" required>
+                        <input autocomplete="off" list="postal_code" type="text" class="form-control" name="postalCode" id="postalCode" value="<?= !empty($_SESSION) ? $locationsListt->postalCode : $users->postalCode ?>" minlength="5" maxlength="5" required>
                         <p class="help-block"><?= isset($errorList['postalCode']) ? $errorList['postalCode'] : '' ?></p>
                     </div>
                 </div>
@@ -121,7 +121,7 @@ include_once 'controller/registerController.php';
                             if (isset($_SESSION['id'])) {
                                 foreach ($locationsList as $locationsDetails) {
                                     ?>
-                                    <option value="<?= $locationsDetails->city ?>" <?= $locationsDetails->city == $_SESSION['city'] ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
+                                    <option value="<?= $locationsDetails->id_taxi_location ?>" <?= $locationsDetails->city == $_SESSION['city'] ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
                                     <?php
                                 }
                             }
@@ -181,9 +181,9 @@ include_once 'controller/registerController.php';
         <!--Js du date picker et la locale pour le français -->
         <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="assets/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+        <script src="assets/js/datePicker.js" type="text/javascript"></script>
         <!-- ajax -->
         <script src="assets/js/postalCodeList.js" type="text/javascript"></script>
-        <script src="assets/js/datePicker.js" type="text/javascript"></script>
         <script src="assets/js/groupClients.js" type="text/javascript"></script>
     </body>
 </html>
