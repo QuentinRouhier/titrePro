@@ -17,6 +17,8 @@ $(function () {
                         error = data.error;
                         if(error == true){
                             $('#errorLogin').show();
+                            $('#errorLogin').css('color', 'red');
+                            $('#errorLogin').css('text-align','center');
                         }else if(error == false){
                             window.location.href = '/index.php';
                         }

@@ -1,6 +1,6 @@
 <?php
 
-// Si verifEmail et verifPassword sont isset 
+// Si verifEmail et verifPassword sont fixer(isset) (ajax) 
 if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     // Tu démares la session
     session_start();
@@ -18,13 +18,13 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     $password = strip_tags($_POST['verifPassword']);
     // Avec la methode getHashByUser on regarde si le mots de passe correspond a celui de l'email
     $users->getHashByUser();
-    //password_verify Vérifie qu'un mot de passe correspond à un hachage .
+    //password_verify Vérifie que le  mot de passe correspond au hachage .
     $isOk = password_verify($password, $users->password);
     // si la mot de passe est identique
     if ($isOk) {
         //tu prend l'email indiquer
         $_SESSION['email'] = $users->email;
-        // Puis tu fais appel a la methode getUsers() pour hydrater et donc remplir les sessions
+        // Puis tu fais appel a la methode getUsers() pour remplir les variables de  sessions 
         $users->getUsers();
         $_SESSION['id'] = $users->id;
         $_SESSION['lastName'] = $users->lastName;
@@ -45,6 +45,11 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     //envoie l'erreur à login.js
     echo json_encode(array('error' => $error));
 } else {
+    //si il n'y a personne de connecter
+    if(isset($_SESSION)){
+    //Instanciation de la classe users pour la connexion (c'est juste pour la value si il ce trompe)
+    $users = new users();
+    }
 // Les message de reussite de l'inscription et de la modification
     $message = '';
     if (isset($_GET['message_reussite'])) {
@@ -53,64 +58,104 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     if (isset($_GET['modification_reussite'])) {
         $message = REGISTER_SUCCESS_UPDATE;
     }
-// la deconnexion.
-    $users = new users();
+
+// si logOut est isset tu deconnect la personne 
     if (isset($_POST['logOut'])) {
         session_unset();
         session_destroy();
     }
-    $booking = new booking();
-    $errorList = array();
-    if (isset($_POST['booking'])) {
-        $booking->id_taxi_users = $_SESSION['id'];
-        $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- ]){2,100}$/i';
-        if (!empty($_POST['placeOfDeparture'])) {
-            // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-            $booking->placeOfDeparture = strip_tags($_POST['placeOfDeparture']);
-            //Si la regex ne match pas
-            if (!preg_match($regexMax100Characters, $booking->placeOfDeparture)) {
-                //Tu mets une erreur
-                $errorList['placeOfDeparture'] = BOOKING_ERROR_PLACE_DEPARTURE;
+
+    // la reservation on regarde ce qui est donner en post (ajax)
+    if (isset($_POST['searchPlaceOfDeparture'])) {
+        //Tu inclus les fichier dans le bonne ordre
+        include_once '../configuration.php';
+        include_once '../class/database.php';
+        include_once '../model/location.php';
+        //Instanciation de la classe location
+        $location = new location();
+        //Tu ajoute ce qu'il y a dans le post dans l'attribu city
+        $location->city = $_POST['searchPlaceOfDeparture'];
+        //tu execute la methode getLocation()
+        $result = $location->getLocation();
+        //tu envoie la reponse en json_encode qui est recuperer dans l'ajax
+        echo json_encode(array('response' => $result));
+    } else if(isset($_POST['searchArrivalPoint'])){
+        //Tu inclus les fichier dans le bonne ordre
+        include_once '../configuration.php';
+        include_once '../class/database.php';
+        include_once '../model/location.php';
+        //Instanciation de la classe location
+        $location = new location();
+        //Tu ajoute ce qu'il y a dans le post dans l'attribu city
+        $location->city = $_POST['searchArrivalPoint'];
+        //tu execute la methode getLocation()
+        $result = $location->getLocation();
+        //tu envoie la reponse en json_encode qui est recuperer dans l'ajax
+        $json_encore = json_encode(array('response' => $result));
+        str_replace("+", " ", $json_encore);
+        echo $json_encore;
+    }else{
+        // instantiation de la class booking
+        $booking = new booking();
+        // cration d'un tableau errorList utiliser tout au long du processuce de reservation 
+        $errorList = array();
+        
+        if (isset($_POST['booking'])) {
+            // on utilise la variable de session pour ajouter l'id de lutilisateur dans l'attribu id_taxi_users
+            $booking->id_taxi_users = $_SESSION['id'];
+            $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- ]){2,100}$/i';
+            //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
+            if (!empty($_POST['placeOfDeparture'])) {
+                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
+                $booking->placeOfDeparture = strip_tags($_POST['placeOfDeparture']);
+                //Si la regex ne match pas
+                if (!preg_match($regexMax100Characters, $booking->placeOfDeparture)) {
+                    //Tu mets une erreur
+                    $errorList['placeOfDeparture'] = BOOKING_ERROR_PLACE_DEPARTURE;
+                }
+                //Sinon tu mets une erreur
+            } else {
+                $errorList['placeOfDeparture'] = BOOKING_EMPTY_VALUE;
             }
-            //Sinon tu mets une erreur
-        } else {
-            $errorList['placeOfDeparture'] = BOOKING_EMPTY_VALUE;
-        }
-        if (!empty($_POST['arrivalPoint'])) {
-            // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-            $booking->arrivalPoint = strip_tags($_POST['arrivalPoint']);
-            //Si la regex ne match pas
-            if (!preg_match($regexMax100Characters, $booking->arrivalPoint)) {
-                //Tu mets une erreur
-                $errorList['arrivalPoint'] = BOOKING_ERROR_ARRIVAL_POINT;
+            //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
+            if (!empty($_POST['arrivalPoint'])) {
+                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
+                $booking->arrivalPoint = strip_tags($_POST['arrivalPoint']);
+                //Si la regex ne match pas
+                if (!preg_match($regexMax100Characters, $booking->arrivalPoint)) {
+                    //Tu mets une erreur
+                    $errorList['arrivalPoint'] = BOOKING_ERROR_ARRIVAL_POINT;
+                }
+                //Sinon tu mets une erreur
+            } else {
+                $errorList['placeOfDeparture'] = BOOKING_EMPTY_VALUE;
             }
-            //Sinon tu mets une erreur
-        } else {
-            $errorList['placeOfDeparture'] = BOOKING_EMPTY_VALUE;
-        }
-        if (!empty($_POST['dateOfDepartur'])) {
-            // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-            $booking->dateOfDepartur = strip_tags($_POST['dateOfDepartur']);
-            //Sinon tu mets une erreur
-        } else {
-            $errorList['dateOfDepartur'] = BOOKING_EMPTY_VALUE;
-        }
-        if (!empty($_POST['timeOfArrival'])) {
-            // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-            $booking->timeOfArrival = strip_tags($_POST['timeOfArrival']);
-            //Sinon tu mets une erreur
-        } else {
-            $errorList['timeOfArrival'] = BOOKING_EMPTY_VALUE;
-        }
-        if (count($errorList) == 0) {
-            //Si PDO renvoie une erreur on le signale à l'utilisateur
-            if (!$booking->addBooking()) {
-                //Tu affiche une erreur
-                $message = BOOKING_ERROR;
-                //Sinon tu redirige la page sur l'index
-            } else
-                header('Location: booking.php');
-            exit;
+            //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
+            if (!empty($_POST['dateOfDepartur'])) {
+                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
+                $booking->dateOfDepartur = strip_tags($_POST['dateOfDepartur']);
+                //Sinon tu mets une erreur
+            } else {
+                $errorList['dateOfDepartur'] = BOOKING_EMPTY_VALUE;
+            }
+            //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
+            if (!empty($_POST['timeOfArrival'])) {
+                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
+                $booking->timeOfArrival = strip_tags($_POST['timeOfArrival']);
+                //Sinon tu mets une erreur
+            } else {
+                $errorList['timeOfArrival'] = BOOKING_EMPTY_VALUE;
+            }
+            if (count($errorList) == 0) {
+                //Si PDO renvoie une erreur on le signale à l'utilisateur
+                if (!$booking->addBooking()) {
+                    //Tu affiche une erreur
+                    $message = BOOKING_ERROR;
+                    //Sinon tu redirige la page sur l'index
+                } else
+                    header('Location: /reservation');
+                exit;
+            }
         }
     }
 }

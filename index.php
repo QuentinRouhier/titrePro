@@ -6,6 +6,7 @@ include_once 'class/database.php';
 include_once 'lang/FR_FR.php';
 include_once 'model/users.php';
 include_once 'model/booking.php';
+include_once 'model/location.php';
 include_once 'controller/indexController.php';
 ?>
 <!doctype html>
@@ -73,7 +74,7 @@ include_once 'controller/indexController.php';
                     </div>
                     <form action="index.php" method="POST">
                         <div class="modal-body">
-                            <span id="errorLogin"><?= LOGINE ?></span>
+                            <div id="errorLogin"><?= LOGINE ?></div>
                             <div class="row form-group">
                                 <label class="control-label col-sm-2" for="email"><?= REGISTER_EMAIL ?></label>
                                 <div class="col-sm-9">
@@ -114,14 +115,32 @@ include_once 'controller/indexController.php';
                         <div class="row form-group <?= isset($errorList['placeOfDeparture']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-2" for="placeOfDeparture"><?= DEPARTURE ?></label>
                             <div class="col-sm-9 ">
-                                <input type="text" class="form-control controls" name="placeOfDeparture" id="placeOfDeparture" value="<?= $booking->placeOfDeparture ?>" placeholder="60400, Noyon, rue de paris" required>
-                                <p class="help-block"><?= isset($errorList['placeOfDeparture']) ? $errorList['placeOfDeparture'] : '' ?></p>
+                                <input list="placeDeparture" type="text" class="form-control" name="placeOfDeparture" id="placeOfDeparture" value="<?= $booking->placeOfDeparture ?>" autocomplete="off" required>
+                                <datalist id="placeDeparture">
+                                    <?php
+                                    foreach ($lisitLocation as $locationList) {
+                                        ?>
+                                        <option value="<?= $locationList->city ?>"><?= $locationList->city ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </datalist>
+                                <p class = "help-block"><?= isset($errorList['placeOfDeparture']) ? $errorList['placeOfDeparture'] : '' ?></p>
                             </div>
                         </div>
                         <div class="row form-group <?= isset($errorList['arrivalPoint']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-2" for="arrivalPoint"><?= ARRIVAL ?></label>
                             <div class="col-sm-9 ">
-                                <input type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint ?>" required>
+                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint ?>" required>
+                                <datalist id="destination">
+                                    <?php
+                                    foreach ($lisitLocation as $locationList) {
+                                        ?>
+                                        <option value="<?= $locationList->city ?>"><?= $locationList->city ?></option>
+                                        <?php
+                                    }
+                                    ?>
+                                </datalist>
                                 <p class="help-block"><?= isset($errorList['arrivalPoint']) ? $errorList['arrivalPoint'] : '' ?></p>
                             </div>
                         </div>
@@ -162,7 +181,7 @@ include_once 'controller/indexController.php';
         <!--Js du timePicker -->
         <script src="assets/js/timepicker.js" type="text/javascript"></script>
         <script>$('#timeOfArrival').timepicker();</script>
-        <script src="assets/js/googleApi.js" type="text/javascript"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCRpy8qNcQ9TFoCaQCRf_0Y9zU33md5BcA&libraries=places&callback=initAutocomplete" async defer></script>  
+        
+        <script src="assets/js/bookingLocation.js" type="text/javascript"></script>
     </body>
 </html>

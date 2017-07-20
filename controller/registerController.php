@@ -4,7 +4,7 @@
 if (!empty($_SESSION)) {
     //Instanciation de la classe location
     $location = new location();
-    //appel de la méthode getPostalCodeBySearch pour pouvoir construire la liste déroulante
+    //appel de la méthode getListLocation pour pouvoir construire la liste déroulante
     // et afficher le bon code postal lors de la modification du profil
     $locationsListt = $location->getListLocation($_SESSION['id_taxi_location']);
 }
@@ -217,17 +217,29 @@ if (isset($_POST['search'])) {
                     //Tu affiche une erreur
                     $message = REGISTER_ERROR_UPDATE;
                     //Sinon tu redirige la page sur l'index
-                } else
-                    header('Location: index.php?modification_reussite');
-                exit;
-            }else {
+                } else {
+                    header('Location: /accueil?modification_reussite');
+                    $_SESSION['lastName'] = $users->lastName;
+                    $_SESSION['firstName'] = $users->firstName;
+                    $_SESSION['address'] = $users->address;
+                    $_SESSION['birthDate'] = date_format(date_create($users->birthDate), 'Y-m-d');
+                    $_SESSION['describeSociety'] = $users->describeSociety;
+                    $_SESSION['email'] = $users->email;
+                    $_SESSION['firstPhoneNumber'] = $users->firstPhoneNumber;
+                    $_SESSION['id_taxi_group'] = $users->id_taxi_group;
+                    $_SESSION['id_taxi_location'] = $users->id_taxi_location;
+                    $_SESSION['secondPhoneNumber'] = $users->secondPhoneNumber;
+                    $_SESSION['society'] = $users->society;
+                    exit;
+                }
+            } else {
                 //Si PDO renvoie une erreur on le signale à l'utilisateur
                 if (!$users->addUser()) {
                     //Tu affiche une erreur
                     $message = REGISTER_ERROR_SEND;
                     //Sinon tu redirige la page sur l'index
                 } else {
-                    header('Location: index.php?message_reussite');
+                    header('Location: /accueil?message_reussite');
                     exit;
                 }
             }

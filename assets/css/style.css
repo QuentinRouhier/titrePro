@@ -10,11 +10,6 @@
     background-color: #286090;
     color : white;
 }
-#messageLogIn
-{
-    color : red;
-    text-align: center;
-}
 #errorLogin{
     display : none;
 }

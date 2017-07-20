@@ -17,7 +17,7 @@ $(function () {
                         response = data.response;
                         $('#city').empty();
                         response.forEach(function (item) {
-                          $('#city').append('<option value="' + item.city + '">'  + item.city + '</option>')
+                          $('#city').append('<option value="' + item.id + '">'  + item.city + '</option>')
                         });
                     },
                     'JSON');

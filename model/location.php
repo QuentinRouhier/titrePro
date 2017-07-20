@@ -37,4 +37,11 @@ class location extends database {
         $queryResult->execute();
         return $queryResult->fetch(PDO::FETCH_OBJ);
     }
+    // Quand on fait une reservation affiche les ville de la base de donner
+    public function getLocation(){
+        $queryResult = $this->pdo->prepare('SELECT `postalCode`,`id`,`city` FROM `taxi_location` WHERE `city` LIKE :city ORDER BY `city` ASC LIMIT 0,10 ');
+        $queryResult->bindValue(':city',  $this->city.'%',PDO::PARAM_STR);
+        $queryResult->execute();
+        return $queryResult->fetchAll(PDO::FETCH_OBJ);
+    }
 }
