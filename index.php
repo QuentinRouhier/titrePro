@@ -128,10 +128,17 @@ include_once 'controller/indexController.php';
                                 <p class = "help-block"><?= isset($errorList['placeOfDeparture']) ? $errorList['placeOfDeparture'] : '' ?></p>
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <label class="control-label col-sm-2" for="addressPlaceOfDeparture"><?= REGISTER_ADDRESS ?></label>
+                            <div class="col-sm-9 <?= isset($errorList['addressPlaceOfDeparture']) ? 'has-error' : '' ?>">
+                                <input type="text" class="form-control" name="addressPlaceOfDeparture" id="address" value="<?= $booking->addressPlaceOfDeparture ?>" required>
+                                <p class="help-block"><?= isset($errorList['addressPlaceOfDeparture']) ? $errorList['addressPlaceOfDeparture'] : '' ?></p>
+                            </div>
+                        </div>
                         <div class="row form-group <?= isset($errorList['arrivalPoint']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-2" for="arrivalPoint"><?= ARRIVAL ?></label>
                             <div class="col-sm-9 ">
-                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint ?>" required>
+                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint ?>" autocomplete="off" required>
                                 <datalist id="destination">
                                     <?php
                                     foreach ($lisitLocation as $locationList) {
@@ -142,6 +149,13 @@ include_once 'controller/indexController.php';
                                     ?>
                                 </datalist>
                                 <p class="help-block"><?= isset($errorList['arrivalPoint']) ? $errorList['arrivalPoint'] : '' ?></p>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label class="control-label col-sm-2" for="addressArrivalPoint"><?= REGISTER_ADDRESS ?></label>
+                            <div class="col-sm-9 <?= isset($errorList['addressArrivalPoint']) ? 'has-error' : '' ?>">
+                                <input type="text" class="form-control" name="addressArrivalPoint" id="address" value="<?= $booking->addressArrivalPoint ?>" required>
+                                <p class="help-block"><?= isset($errorList['addressArrivalPoint']) ? $errorList['addressArrivalPoint'] : '' ?></p>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -181,7 +195,7 @@ include_once 'controller/indexController.php';
         <!--Js du timePicker -->
         <script src="assets/js/timepicker.js" type="text/javascript"></script>
         <script>$('#timeOfArrival').timepicker();</script>
-        
+
         <script src="assets/js/bookingLocation.js" type="text/javascript"></script>
     </body>
 </html>

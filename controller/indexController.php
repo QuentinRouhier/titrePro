@@ -46,24 +46,26 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     echo json_encode(array('error' => $error));
 } else {
     //si il n'y a personne de connecter
-    if(isset($_SESSION)){
-    //Instanciation de la classe users pour la connexion (c'est juste pour la value si il ce trompe)
-    $users = new users();
+    if (isset($_SESSION)) {
+        //Instanciation de la classe users pour la connexion (c'est juste pour la value si il ce trompe)
+        $users = new users();
     }
-// Les message de reussite de l'inscription et de la modification
-    $message = '';
-    if (isset($_GET['message_reussite'])) {
-        $message = REGISTER_SUCCESS_SEND;
-    }
-    if (isset($_GET['modification_reussite'])) {
-        $message = REGISTER_SUCCESS_UPDATE;
-    }
-
 // si logOut est isset tu deconnect la personne 
     if (isset($_POST['logOut'])) {
         session_unset();
         session_destroy();
     }
+// Les message de reussite de l'inscription et de la modification
+    $message = '';
+    //si message_reussite et passer en parametre la variable $message contient un message
+    if (isset($_GET['message_reussite'])) {
+        $message = REGISTER_SUCCESS_SEND;
+    }
+    //si modification_reussite et passer en parametre la variable $message contient un message
+    if (isset($_GET['modification_reussite'])) {
+        $message = REGISTER_SUCCESS_UPDATE;
+    }
+
 
     // la reservation on regarde ce qui est donner en post (ajax)
     if (isset($_POST['searchPlaceOfDeparture'])) {
@@ -75,11 +77,11 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
         $location = new location();
         //Tu ajoute ce qu'il y a dans le post dans l'attribu city
         $location->city = $_POST['searchPlaceOfDeparture'];
-        //tu execute la methode getLocation()
+        //tu execute la methode getLocation() dans la variable $result
         $result = $location->getLocation();
         //tu envoie la reponse en json_encode qui est recuperer dans l'ajax
         echo json_encode(array('response' => $result));
-    } else if(isset($_POST['searchArrivalPoint'])){
+    } else if (isset($_POST['searchArrivalPoint'])) {
         //Tu inclus les fichier dans le bonne ordre
         include_once '../configuration.php';
         include_once '../class/database.php';
@@ -94,16 +96,16 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
         $json_encore = json_encode(array('response' => $result));
         str_replace("+", " ", $json_encore);
         echo $json_encore;
-    }else{
+    } else {
         // instantiation de la class booking
         $booking = new booking();
         // cration d'un tableau errorList utiliser tout au long du processuce de reservation 
         $errorList = array();
-        
+
         if (isset($_POST['booking'])) {
             // on utilise la variable de session pour ajouter l'id de lutilisateur dans l'attribu id_taxi_users
             $booking->id_taxi_users = $_SESSION['id'];
-            $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- ]){2,100}$/i';
+            $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- >]){2,100}$/i';
             //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
             if (!empty($_POST['placeOfDeparture'])) {
                 // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
@@ -117,6 +119,18 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
             } else {
                 $errorList['placeOfDeparture'] = BOOKING_EMPTY_VALUE;
             }
+            if (!empty($_POST['addressPlaceOfDeparture'])) {
+                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
+                $booking->addressPlaceOfDeparture = strip_tags($_POST['addressPlaceOfDeparture']);
+                //Si la regex ne match pas
+                if (!preg_match($regexMax100Characters, $booking->addressPlaceOfDeparture)) {
+                    //Tu mets une erreur
+                    $errorList['addressPlaceOfDeparture'] = BOOKING_ERROR_ADDRESS_PLACE_DEPARTURE;
+                }
+                //Sinon tu mets une erreur
+            } else {
+                $errorList['addressPlaceOfDeparture'] = BOOKING_EMPTY_VALUE;
+            }
             //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
             if (!empty($_POST['arrivalPoint'])) {
                 // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
@@ -128,7 +142,19 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
                 }
                 //Sinon tu mets une erreur
             } else {
-                $errorList['placeOfDeparture'] = BOOKING_EMPTY_VALUE;
+                $errorList['arrivalPoint'] = BOOKING_EMPTY_VALUE;
+            }
+            if (!empty($_POST['addressArrivalPoint'])) {
+                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
+                $booking->addressArrivalPoint = strip_tags($_POST['addressArrivalPoint']);
+                //Si la regex ne match pas
+                if (!preg_match($regexMax100Characters, $booking->addressArrivalPoint)) {
+                    //Tu mets une erreur
+                    $errorList['addressArrivalPoint'] = BOOKING_ERROR_ARRIVAL_POINT;
+                }
+                //Sinon tu mets une erreur
+            } else {
+                $errorList['addressArrivalPoint'] = BOOKING_EMPTY_VALUE;
             }
             //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
             if (!empty($_POST['dateOfDepartur'])) {
