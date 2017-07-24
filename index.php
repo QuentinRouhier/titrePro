@@ -25,7 +25,6 @@ include_once 'controller/indexController.php';
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
     </head>
     <body>
-        <?= var_dump($_SESSION) ?>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -111,9 +110,9 @@ include_once 'controller/indexController.php';
                     ?>
                     <p><?= $message ?> </p>
                     <h2><?= USER_CONNECT ?></h2>
-                    <form action="index.php" method="POST" class="form-vertical">
+                    <form action="/reservation" method="POST" class="form-vertical">
                         <div class="row form-group <?= isset($errorList['placeOfDeparture']) ? 'has-error' : '' ?>">
-                            <label class="control-label col-sm-2" for="placeOfDeparture"><?= DEPARTURE ?></label>
+                            <label class="control-label col-sm-3" for="placeOfDeparture"><?= DEPARTURE ?></label>
                             <div class="col-sm-9 ">
                                 <input list="placeDeparture" type="text" class="form-control" name="placeOfDeparture" id="placeOfDeparture" value="<?= $booking->placeOfDeparture ?>" autocomplete="off" required>
                                 <datalist id="placeDeparture">
@@ -129,16 +128,16 @@ include_once 'controller/indexController.php';
                             </div>
                         </div>
                         <div class="row form-group">
-                            <label class="control-label col-sm-2" for="addressPlaceOfDeparture"><?= REGISTER_ADDRESS ?></label>
+                            <label class="control-label col-sm-3" for="addressPlaceOfDeparture"><?= ADDRESS_DEPARTURE ?></label>
                             <div class="col-sm-9 <?= isset($errorList['addressPlaceOfDeparture']) ? 'has-error' : '' ?>">
                                 <input type="text" class="form-control" name="addressPlaceOfDeparture" id="address" value="<?= $booking->addressPlaceOfDeparture ?>" required>
                                 <p class="help-block"><?= isset($errorList['addressPlaceOfDeparture']) ? $errorList['addressPlaceOfDeparture'] : '' ?></p>
                             </div>
                         </div>
                         <div class="row form-group <?= isset($errorList['arrivalPoint']) ? 'has-error' : '' ?>">
-                            <label class="control-label col-sm-2" for="arrivalPoint"><?= ARRIVAL ?></label>
+                            <label class="control-label col-sm-3" for="arrivalPoint"><?= ARRIVAL ?></label>
                             <div class="col-sm-9 ">
-                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint ?>" autocomplete="off" required>
+                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint . ' -> ' . $booking->postalCodeArrivalPoint ?>" autocomplete="off" required>
                                 <datalist id="destination">
                                     <?php
                                     foreach ($lisitLocation as $locationList) {
@@ -152,7 +151,7 @@ include_once 'controller/indexController.php';
                             </div>
                         </div>
                         <div class="row form-group">
-                            <label class="control-label col-sm-2" for="addressArrivalPoint"><?= REGISTER_ADDRESS ?></label>
+                            <label class="control-label col-sm-3" for="addressArrivalPoint"><?= ADDRESS_ARRIVAL ?></label>
                             <div class="col-sm-9 <?= isset($errorList['addressArrivalPoint']) ? 'has-error' : '' ?>">
                                 <input type="text" class="form-control" name="addressArrivalPoint" id="address" value="<?= $booking->addressArrivalPoint ?>" required>
                                 <p class="help-block"><?= isset($errorList['addressArrivalPoint']) ? $errorList['addressArrivalPoint'] : '' ?></p>
@@ -160,7 +159,7 @@ include_once 'controller/indexController.php';
                         </div>
                         <div class="row form-group">
                             <div clas="<?= isset($errorList['timeOfArrival']) ? 'has-error' : '' ?>">
-                                <label class="control-label col-sm-2" for="timeOfArrival"><?= TIME_ARRIVAL ?></label>
+                                <label class="control-label col-sm-3" for="timeOfArrival"><?= TIME_ARRIVAL ?></label>
                                 <div class="col-sm-4 ">
                                     <input type="text" class="form-control" name="timeOfArrival" id="timeOfArrival" value="<?= $booking->timeOfArrival ?>" required>
                                     <p class="help-block"><?= isset($errorList['timeOfArrival']) ? $errorList['timeOfArrival'] : '' ?></p>

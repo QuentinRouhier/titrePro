@@ -93,9 +93,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
         //tu execute la methode getLocation()
         $result = $location->getLocation();
         //tu envoie la reponse en json_encode qui est recuperer dans l'ajax
-        $json_encore = json_encode(array('response' => $result));
-        str_replace("+", " ", $json_encore);
-        echo $json_encore;
+        echo json_encode(array('response' => $result));
     } else {
         // instantiation de la class booking
         $booking = new booking();
@@ -105,11 +103,14 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
         if (isset($_POST['booking'])) {
             // on utilise la variable de session pour ajouter l'id de lutilisateur dans l'attribu id_taxi_users
             $booking->id_taxi_users = $_SESSION['id'];
-            $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- >]){2,100}$/i';
+            $regexMax100Characters = '/^([a-z0-9àéèëêù\'ïîâäöôç\- ,.>]){2,100}$/i';
             //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
             if (!empty($_POST['placeOfDeparture'])) {
                 // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-                $booking->placeOfDeparture = strip_tags($_POST['placeOfDeparture']);
+                $placeOfDeparture = strip_tags($_POST['searchArrivalPoint']);
+                $departure = explode(' -> ',$placeOfDeparture);
+                $booking->placeOfDeparture = $departure[0];
+                $booking->postalCodeDeparture = $departure[1];
                 //Si la regex ne match pas
                 if (!preg_match($regexMax100Characters, $booking->placeOfDeparture)) {
                     //Tu mets une erreur
@@ -133,8 +134,11 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
             }
             //si ce qui est envoyer en post n'est pas vide tu passe a l'etape suivante
             if (!empty($_POST['arrivalPoint'])) {
-                // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
-                $booking->arrivalPoint = strip_tags($_POST['arrivalPoint']);
+                // tu passe en POST la value qui es de dans pour le placer dans une variable
+                $arrivalPoint = strip_tags($_POST['arrivalPoint']);
+                $destination = explode(' -> ',$arrivalPoint);
+                $booking->arrivalPoint = $destination[0];
+                $booking->postalCodeArrivalPoint = $destination[1];
                 //Si la regex ne match pas
                 if (!preg_match($regexMax100Characters, $booking->arrivalPoint)) {
                     //Tu mets une erreur
@@ -178,9 +182,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
                     //Tu affiche une erreur
                     $message = BOOKING_ERROR;
                     //Sinon tu redirige la page sur l'index
-                } else
-                    header('Location: /reservation');
-                exit;
+                }
             }
         }
     }

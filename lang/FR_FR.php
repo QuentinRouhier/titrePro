@@ -62,8 +62,8 @@ define('EDIT','Profil');
 
 define('DEPARTURE','Départ : *');
 define('ARRIVAL','Arrivé : *');
-define('TIME_ARRIVAL','Heure d\'arrivé :*');
-define('DATE_DEPARTURE','Date:*');
+define('TIME_ARRIVAL','Heure d\'arrivé : *');
+define('DATE_DEPARTURE','Date : *');
 define('BOOKING','Réservation');
 
 define('LOGINE','Les données saisi sont incorrect');
@@ -73,3 +73,6 @@ define('BOOKING_ERROR_PLACE_DEPARTURE','L\'adresse doit comporter au moins 2 let
 define('BOOKING_ERROR_ARRIVAL_POINT','L\'adresse doit comporter au moins 2 lettres et maximum 100');
 define('BOOKING_ERROR_ADDRESS_PLACE_DEPARTURE','L\'adresse doit comporter au moins 2 lettres et maximum 100');
 define('BOOKING_ERROR','Erreur durant la réservation.');
+
+define('ADDRESS_ARRIVAL','Adresse d\'arriver : *');
+define('ADDRESS_DEPARTURE','Adresse de depart : *');

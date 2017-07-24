@@ -1,3 +1,14 @@
+<?php
+session_start();
+//On inclut tous les fichiers nécessaires et dans le bon ordre.
+include_once 'configuration.php';
+include_once 'class/database.php';
+include_once 'lang/FR_FR.php';
+include_once 'model/users.php';
+include_once 'model/location.php';
+include_once 'model/booking.php';
+include_once 'controller/bookingController.php';
+?>
 <!doctype html>
 <html>
     <head>
@@ -30,5 +41,6 @@
                 </div>
             </div>
         </nav>
+        <?= var_dump($taxiBooking) ?>
     </body>
 </html>

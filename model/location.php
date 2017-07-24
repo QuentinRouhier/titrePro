@@ -24,6 +24,7 @@ class location extends database {
     }
     /**
      * Methode permetant de chercher une ville par rapport a son code postal.
+     * passe en parametre la valeur de l'input de recherche.
      */
     public function getPostalCodeBySearch($search){
         $queryResult = $this->pdo->prepare('SELECT `postalCode`,`id`,`city` FROM `taxi_location` WHERE `postalCode` LIKE :search');
