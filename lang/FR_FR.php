@@ -76,3 +76,14 @@ define('BOOKING_ERROR','Erreur durant la réservation.');
 
 define('ADDRESS_ARRIVAL','Adresse d\'arriver : *');
 define('ADDRESS_DEPARTURE','Adresse de depart : *');
+
+define('LAST_NAME','Nom :');
+define('FIRST_NAME','Prénom :');
+define('POSTAL_CODE','Code postal :');
+define('CITY','Ville :');
+define('FIRST_PHONE_NUMBER','Premier numéro de téléphone :');
+define('SECOND_PHONE_NUMBER','Second numéro de téléphone :');
+define('ADDRESS','Adresse:');
+define('SOCIETY','Société :');
+define('DESCRIBE_SOCIETY','Déscription de la société : ');
+define('EMAIL','Adresse Mail :');
