@@ -46,5 +46,4 @@ class booking extends database {
         $queryResult->bindValue(':id_taxi_users', $this->id_taxi_users, PDO::PARAM_INT);
         return $queryResult->execute();
     }
-
 }

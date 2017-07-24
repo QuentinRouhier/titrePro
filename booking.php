@@ -42,5 +42,87 @@ include_once 'controller/bookingController.php';
             </div>
         </nav>
         <?= var_dump($taxiBooking) ?>
+        <div class="container-fluid">
+            <div class="row col-lg-offset-2 col-sm-8 ">
+                <?php
+                foreach ($taxiBooking as $taxiList) {
+                    ?>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= LAST_NAME ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->lastName ?></p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= FIRST_NAME ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->firstName ?></p>
+                        </div>
+                    </div>
+                <?php
+                foreach ($getLocation as $locationList) {
+                    ?>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= POSTAL_CODE ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $locationList->postalCode ?></p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= CITY ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $locationList->city ?></p>
+                        </div>
+                    </div>
+                <?php } ?>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= FIRST_PHONE_NUMBER ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->firstPhoneNumber ?></p>
+                        </div>
+                    </div>
+                    <?php
+                    if (!empty($taxiList->secondPhoneNumber)) {
+                        ?>
+                        <div class="row form-group">
+                            <p class="control-label col-sm-3"><?= SECOND_PHONE_NUMBER ?></p>
+                            <div class="col-sm-9">
+                                <p><?= $taxiList->secondPhoneNumber ?></p>
+                            </div>
+                        </div>
+                    <?php }?>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= ADDRESS ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->address ?></p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= SOCIETY ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->society ?></p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= DESCRIBE_SOCIETY ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->describeSociety ?></p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <p class="control-label col-sm-3"><?= EMAIL ?></p>
+                        <div class="col-sm-9">
+                            <p><?= $taxiList->email ?></p>
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <div class="col-sm-offset-5 col-sm-2">
+                            <input type="submit" name="booking" id="booking" value="<?= BOOKING ?>" class="form-control"/>
+                        </div>
+                    </div>
+                    <hr>
+                <?php } ?>
+            </div>
+        </div>
     </body>
 </html>

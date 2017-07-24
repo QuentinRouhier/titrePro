@@ -180,7 +180,7 @@ include_once 'controller/registerController.php';
         <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
         <!--Js du date picker et la locale pour le français -->
         <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="assets/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+        <script src="assets/js/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
         <script src="assets/js/datePicker.js" type="text/javascript"></script>
         <!-- ajax -->
         <script src="assets/js/postalCodeList.js" type="text/javascript"></script>

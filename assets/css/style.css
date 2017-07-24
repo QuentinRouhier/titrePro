@@ -1,15 +1,32 @@
-#home
-{
+#home {
     font-size:xx-large;
     font-family: Gentium Book Basic;
     text-align: center;
     background-color: silver;
 }
-#booking
-{
+#booking {
     background-color: #286090;
     color : white;
 }
 #errorLogin{
     display : none;
+}
+hr {
+    border-top: 1px solid #8c8b8b;
+    text-align: center;
+    margin-top: 30px; 
+    margin-bottom: 30px; 
+}
+hr:after {
+    content: 'Help-Taxi';
+    display: inline-block;
+    position: relative;
+    top: -14px;
+    padding: 0 10px;
+    background: #f0f0f0;
+    color: #8c8b8b;
+    font-size: 18px;
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    transform: rotate(10deg);
 }

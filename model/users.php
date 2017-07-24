@@ -26,9 +26,7 @@ class users extends database {
     public $password = '';
     public $id_taxi_group = 0;
     public $id_taxi_location = 0;
-    
     public $postalCode = '';
-    
 
     /**
      * Déclaration de la méthode magique construct.
@@ -154,16 +152,37 @@ class users extends database {
     public function searchTaxiByPostalCodeDeparture() {
         $query = 'SELECT `taxi_users`.`firstName`'
                 . ',`taxi_users`.`id`'
+                . ',`taxi_users`.`lastName`'
+                . ',`taxi_users`.`firstPhoneNumber`'
+                . ',`taxi_users`.`secondPhoneNumber`'
+                . ',`taxi_users`.`address`'
+                . ',`taxi_users`.`society`'
+                . ',`taxi_users`.`describeSociety`'
+                . ',`taxi_users`.`email`'
+                . ',`taxi_location`.`postalCode`'
+                . 'FROM `taxi_users` '
+                . 'INNER JOIN `taxi_location` '
+                . 'ON `taxi_users`.`id_taxi_location` = `taxi_location`.`id` '
+                . 'WHERE `taxi_location`.`postalCode` LIKE :postalCode AND `taxi_users`.`id_taxi_group` = 1';
+        $queryResult = $this->pdo->prepare($query);
+        $queryResult->bindValue(':postalCode', $this->postalCode . '%', PDO::PARAM_STR);
+        $queryResult->execute();
+        $result = $queryResult->fetchALL(PDO::FETCH_OBJ);
+        return $result;
+    }
+
+    public function GetCityAndPostalCode() {
+        $query = 'SELECT `taxi_users`.`firstName`'
+                . ',`taxi_location`.`city`'
                 . ',`taxi_location`.`postalCode` '
                 . 'FROM `taxi_users` '
                 . 'INNER JOIN `taxi_location` '
                 . 'ON `taxi_users`.`id_taxi_location` = `taxi_location`.`id` '
-                . 'WHERE `taxi_location`.`postalCode` AND `taxi_users`.`id_taxi_group` = 1'
-                . 'LIKE :postalCode';
+                . 'WHERE `taxi_users`.`id` = :id';
         $queryResult = $this->pdo->prepare($query);
-        $queryResult->bindValue(':postalCode', $this->postalCode . '%' , PDO::PARAM_STR);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryResult->execute();
-        $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+        $result = $queryResult->fetchALL(PDO::FETCH_OBJ);
         return $result;
     }
 

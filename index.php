@@ -189,7 +189,7 @@ include_once 'controller/indexController.php';
         <script src="assets/js/login.js" type="text/javascript"></script>
         <!--Js du date picker et la locale pour le français -->
         <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
-        <script src="assets/locales/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
+        <script src="assets/js/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>
         <script src="assets/js/datePicker.js" type="text/javascript"></script>
         <!--Js du timePicker -->
         <script src="assets/js/timepicker.js" type="text/javascript"></script>
