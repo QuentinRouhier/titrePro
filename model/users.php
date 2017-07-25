@@ -84,7 +84,7 @@ class users extends database {
     }
 
     /**
-     * méthode permettant de selectionner un utilisateur.
+     * méthode permettant de selectionner un utilisateur par son adresse mail.
      */
     public function getUsers() {
         $query = 'SELECT `id`,`lastName`, `firstName`, `firstPhoneNumber`, `secondPhoneNumber`, `birthDate`, `address`, `society`, `describeSociety`, `email`, `id_taxi_group`,`id_taxi_location` FROM taxi_users WHERE email = :email';
@@ -151,14 +151,10 @@ class users extends database {
 
     public function searchTaxiByPostalCodeDeparture() {
         $query = 'SELECT `taxi_users`.`firstName`'
-                . ',`taxi_users`.`id`'
                 . ',`taxi_users`.`lastName`'
-                . ',`taxi_users`.`firstPhoneNumber`'
-                . ',`taxi_users`.`secondPhoneNumber`'
-                . ',`taxi_users`.`address`'
+                . ',`taxi_users`.`id`'
                 . ',`taxi_users`.`society`'
                 . ',`taxi_users`.`describeSociety`'
-                . ',`taxi_users`.`email`'
                 . ',`taxi_location`.`postalCode`'
                 . 'FROM `taxi_users` '
                 . 'INNER JOIN `taxi_location` '
@@ -167,14 +163,22 @@ class users extends database {
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':postalCode', $this->postalCode . '%', PDO::PARAM_STR);
         $queryResult->execute();
-        $result = $queryResult->fetchALL(PDO::FETCH_OBJ);
+        $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
 
-    public function GetCityAndPostalCode() {
-        $query = 'SELECT `taxi_users`.`firstName`'
-                . ',`taxi_location`.`city`'
+    public function getCityPostalCodeAndTaxiById() {
+        $query = 'SELECT `taxi_users`.`firstName` '
+                . ',`taxi_users`.`id` '
+                . ',`taxi_users`.`lastName` '
+                . ',`taxi_users`.`firstPhoneNumber` '
+                . ',`taxi_users`.`secondPhoneNumber` '
+                . ',`taxi_users`.`address` '
+                . ',`taxi_users`.`society` '
+                . ',`taxi_users`.`describeSociety` '
+                . ',`taxi_users`.`email` '
                 . ',`taxi_location`.`postalCode` '
+                . ',`taxi_location`.`city` '
                 . 'FROM `taxi_users` '
                 . 'INNER JOIN `taxi_location` '
                 . 'ON `taxi_users`.`id_taxi_location` = `taxi_location`.`id` '
@@ -182,7 +186,7 @@ class users extends database {
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryResult->execute();
-        $result = $queryResult->fetchALL(PDO::FETCH_OBJ);
+        $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
 

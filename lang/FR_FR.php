@@ -87,3 +87,4 @@ define('ADDRESS','Adresse:');
 define('SOCIETY','Société :');
 define('DESCRIBE_SOCIETY','Déscription de la société : ');
 define('EMAIL','Adresse Mail :');
+define('VIEW_PROFILE','Voir le profil');

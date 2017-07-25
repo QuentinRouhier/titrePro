@@ -137,7 +137,7 @@ include_once 'controller/indexController.php';
                         <div class="row form-group <?= isset($errorList['arrivalPoint']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-3" for="arrivalPoint"><?= ARRIVAL ?></label>
                             <div class="col-sm-9 ">
-                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint . ' -> ' . $booking->postalCodeArrivalPoint ?>" autocomplete="off" required>
+                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint?>" autocomplete="off" required>
                                 <datalist id="destination">
                                     <?php
                                     foreach ($lisitLocation as $locationList) {

@@ -1,5 +1,5 @@
-$( "#group" ).ready(function() {
-  if ($('#group').val() == 1) {
+$("#group").ready(function () {
+    if ($('#group').val() == 1) {
         $('#divSociety').removeClass('hidden');
         $('#divDescribeSociety').removeClass('hidden');
     } else {
@@ -16,4 +16,4 @@ $('#group').change(function () {
         $('#divSociety').addClass('hidden');
         $('#divDescribeSociety').addClass('hidden');
     }
-}); 
+});

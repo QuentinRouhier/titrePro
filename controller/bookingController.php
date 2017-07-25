@@ -102,6 +102,6 @@ $postalCode = $placeOfDepartureArray[1];
 $users->postalCode = $postalCode;
 // On utilise la méthode searchTaxiByPostalCodeDeparture() pour récupérer les chauffeurs de taxi ayant le même code postal
 $taxiBooking = '';
-if ($taxiBooking  = $users->searchTaxiByPostalCodeDeparture()) {
-    $getLocation = $users->GetCityAndPostalCode();
+if ($taxiBooking = $users->searchTaxiByPostalCodeDeparture()) {
+    
 }
