@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+Options +FollowSymlinks -Multiviews
+RewriteEngine on
+RewriteRule ^accueil$ /index.php
+RewriteRule ^accueil$ /index.php?modification_reussite
+RewriteRule ^accueil$ /index.php?message_reussite
+RewriteRule ^modification$ /register.php
+RewriteRule ^inscription$ /register.php
+RewriteRule ^reservation$ /booking.php
+RewriteRule ^taxiBooking$ /taxiProfile.php
+</IfModule>
