@@ -72,7 +72,7 @@ include_once 'controller/bookingController.php';
                     </div>
                     <div class="row form-group">
                         <div class="col-sm-offset-5 col-sm-2">
-                            <form action="/taxiBooking" method="POST">
+                            <form action="booking.php" method="POST">
                                 <input type="hidden" name="idTaxi" id="idTaxi" value="<?= $taxiList->id ?>"/>
                                 <button type="submit" name="viewProfile" class="btn btn-success"><?= VIEW_PROFILE ?></button>
                             </form>

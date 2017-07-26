@@ -219,6 +219,7 @@ if (isset($_POST['search'])) {
                     //Sinon tu redirige la page sur l'index
                 } else {
                     header('Location: /accueil?modification_reussite');
+                    $_SESSION['id'] = $users->id;
                     $_SESSION['lastName'] = $users->lastName;
                     $_SESSION['firstName'] = $users->firstName;
                     $_SESSION['address'] = $users->address;
@@ -245,17 +246,4 @@ if (isset($_POST['search'])) {
             }
         }
     }
-}
-// Si le boutton delete est isset
-if (isset($_POST['delete'])) {
-    //tu prend l'id de la perssone
-    $users->id = intval($_SESSION['id']);
-    //Tu va chercher la methode deleteUser() dans l'objet users
-    $users->deleteUser();
-    // Tu decconect la personne
-    session_unset();
-    session_destroy();
-    //Tu la redirige sur l'index
-    header('Location: /accueil');
-    exit;
 }

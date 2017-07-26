@@ -30,3 +30,10 @@ hr:after {
     -moz-transform: rotate(10deg);
     transform: rotate(10deg);
 }
+.navbar-brand {
+ padding: 0px;
+}
+.navbar-brand>img {
+ height: 100%;
+ width: auto;
+}

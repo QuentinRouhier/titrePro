@@ -20,6 +20,7 @@ include_once 'controller/registerController.php';
         <link href="assets/css/bootstrap-datepicker3.standalone.css" rel="stylesheet" type="text/css"/>
         <!-- mask pour le téléphone-->
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
@@ -41,12 +42,17 @@ include_once 'controller/registerController.php';
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
                         <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
+                        <?php
+                        if (!empty($_SESSION)) {
+                            ?>
+                            <a href="delete.php" class="btn btn-success navbar-btn">Supprimer votre compte  </a>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
         </nav>
         <div class="container-fluid">
-            <h1 class="col-sm-offset-3"><?= REGISTER_TITLE ?></h1>
+            <h1 class="col-sm-offset-3"><?= !empty($_SESSION) ? UPDATE_USER : REGISTER_TITLE ?></h1>
             <h2 class="text-center"><?= $message ?></h2>
             <form action="register.php" method="POST" class="form-vertical">
                 <div class="row form-group">
@@ -164,15 +170,9 @@ include_once 'controller/registerController.php';
                         <p class="help-block"><?= isset($errorList['confirmPassword']) ? $errorList['confirmPassword'] : '' ?></p>
                     </div>
                 </div>
-                <hr>
-                <div class="row form-group col-md-offset-4 col-md-4">
-                    <?php
-                    if (!empty($_SESSION)) {
-                        ?>
-                        <input type="submit" name="delete" value="<?= DELETE ?>" class="form-control"/>
-                    <?php } ?>
-                    <input type="submit" name="register" value="<?= !empty($_SESSION) ? UPDATE : REGISTER_REGISTER ?>" class="form-control"/>
-                </div>             
+                <div class="row form-group col-md-offset-5">
+                    <button type="submit" name="register" class="btn btn-primary btn-lg"><?= !empty($_SESSION) ? UPDATE : REGISTER_REGISTER ?></button>
+                </div>
             </form>
         </div>
         <!-- pour le mask du telephone -->

@@ -23,6 +23,7 @@ class booking extends database {
     public $timeOfArrival = '';
     public $dateOfDepartur = '';
     public $id_taxi_users = 0;
+    public $id_taxi_booked = 0;
 
     /**
      * Déclaration de la méthode magique construct.
@@ -34,7 +35,7 @@ class booking extends database {
     }
 
     public function addBooking() {
-        $queryResult = $this->pdo->prepare('INSERT INTO `taxi_booking`(`placeOfDeparture`, `postalCodeDeparture`, `addressPlaceOfDeparture`, `arrivalPoint`, `postalCodeArrivalPoint`, `addressArrivalPoint`, `timeOfArrival`, `dateOfDepartur`, `id_taxi_users`) VALUES (:placeOfDeparture, :postalCodeDeparture, :addressPlaceOfDeparture, :arrivalPoint, :postalCodeArrivalPoint, :addressArrivalPoint, CONCAT(:timeOfArrival,\':00\'), STR_TO_DATE(:dateOfDepartur, \'%d/%m/%Y\'), :id_taxi_users)');
+        $queryResult = $this->pdo->prepare('INSERT INTO `taxi_booking`(`placeOfDeparture`, `postalCodeDeparture`, `addressPlaceOfDeparture`, `arrivalPoint`, `postalCodeArrivalPoint`, `addressArrivalPoint`, `timeOfArrival`, `dateOfDepartur`, `id_taxi_users`, `id_taxi_booked`) VALUES (:placeOfDeparture, :postalCodeDeparture, :addressPlaceOfDeparture, :arrivalPoint, :postalCodeArrivalPoint, :addressArrivalPoint, CONCAT(:timeOfArrival,\':00\'), STR_TO_DATE(:dateOfDepartur, \'%d/%m/%Y\'), :id_taxi_users, :id_taxi_booked)');
         $queryResult->bindValue(':placeOfDeparture', $this->placeOfDeparture, PDO::PARAM_STR);
         $queryResult->bindValue(':postalCodeDeparture', $this->postalCodeDeparture, PDO::PARAM_STR);
         $queryResult->bindValue(':addressPlaceOfDeparture', $this->addressPlaceOfDeparture, PDO::PARAM_STR);
@@ -44,6 +45,7 @@ class booking extends database {
         $queryResult->bindValue(':timeOfArrival', $this->timeOfArrival, PDO::PARAM_STR);
         $queryResult->bindValue(':dateOfDepartur', $this->dateOfDepartur, PDO::PARAM_STR);
         $queryResult->bindValue(':id_taxi_users', $this->id_taxi_users, PDO::PARAM_INT);
+        $queryResult->bindValue(':id_taxi_booked', $this->id_taxi_booked, PDO::PARAM_INT);
         return $queryResult->execute();
     }
 }

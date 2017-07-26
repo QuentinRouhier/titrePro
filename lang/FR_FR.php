@@ -38,6 +38,7 @@ define('REGISTER_ERROR_SERVICENAME','Wrong!');
 define('REGISTER_ERROR_SEND','Erreur durant l\'ajout de l\'utilisateur');
 define('REGISTER_ERROR_UPDATE','Erreur durant la modification de l\'utilisateur');
 define('REGISTER_SUCCESS_SEND','L\'utilisateur a bien été ajouté');
+define('DELETE_SUCCESS_SEND','L\'utilisateur a bien été supprimé');
 define('REGISTER_SUCCESS_UPDATE','L\'utilisateur a bien été modifié');
 define('REGISTER_EMPTY_VALUE','Veuillez remplir le champ');
 define('REGISTER_RETURN','Retour');
@@ -52,11 +53,13 @@ define('USER_CONNECT','Réservez votre taxi.');
 
 define('DELETE','Supprimer');
 define('UPDATE','Modifier');
+define('UPDATE_USER','Modification d\'un utilisateur');
 
 define('SIGN_UP','Inscription');
 define('SIGN_IN','Connexion');
 define('LOG_OUT','Déconnexion');
 define('CLOSE','Fermer');
+define('MY_DIARY','Agenda');
 define('MY_BOOKING','Mes réservation');
 define('EDIT','Profil');
 
@@ -64,13 +67,15 @@ define('DEPARTURE','Départ : *');
 define('ARRIVAL','Arrivé : *');
 define('TIME_ARRIVAL','Heure d\'arrivé : *');
 define('DATE_DEPARTURE','Date : *');
+define('TIME_OF_ARRIVAL','Heure d\'arrivé ');
+define('DATE_OF_DEPARTURE','Date ');
 define('BOOKING','Réservation');
 
 define('LOGINE','Les données saisi sont incorrect');
 
 define('BOOKING_EMPTY_VALUE','Veuillez remplir le champ');
-define('BOOKING_ERROR_PLACE_DEPARTURE','L\'adresse doit comporter au moins 2 lettres et maximum 100');
-define('BOOKING_ERROR_ARRIVAL_POINT','L\'adresse doit comporter au moins 2 lettres et maximum 100');
+define('BOOKING_ERROR_PLACE_DEPARTURE','Veuillez respecter la syntaxe suivante : XXXXXX -> 00000');
+define('BOOKING_ERROR_ARRIVAL_POINT','Veuillez respecter la syntaxe suivante : XXXXXX -> 00000');
 define('BOOKING_ERROR_ADDRESS_PLACE_DEPARTURE','L\'adresse doit comporter au moins 2 lettres et maximum 100');
 define('BOOKING_ERROR','Erreur durant la réservation.');
 
@@ -88,3 +93,4 @@ define('SOCIETY','Société :');
 define('DESCRIBE_SOCIETY','Déscription de la société : ');
 define('EMAIL','Adresse Mail :');
 define('VIEW_PROFILE','Voir le profil');
+define('CHOOSE_TAXI','Je résérve ce taxi');

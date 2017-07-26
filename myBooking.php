@@ -5,14 +5,13 @@ include_once 'configuration.php';
 include_once 'class/database.php';
 include_once 'lang/FR_FR.php';
 include_once 'model/users.php';
-include_once 'model/location.php';
 include_once 'model/booking.php';
-include_once 'controller/taxiProfileController.php';
+include_once 'controller/myBookingController.php';
 ?>
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Profile du taxi demandé</title>
+        <title>Mes résérvation</title>
         <meta charset="UTF-8"/>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
@@ -43,81 +42,50 @@ include_once 'controller/taxiProfileController.php';
         </nav>
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
-                <?= $message ?>
                 <?php
-                foreach ($getCityPostalCodeAndTaxiById as $viewTaxi) {
+                foreach ($getbookingById as $getbooking) {
                     ?>
                     <div class="row form-group">
                         <p class="control-label col-sm-3"><?= LAST_NAME ?></p>
                         <div class="col-sm-9">
-                            <p><?= $viewTaxi->lastName ?></p>
+                            <p><?= $getbooking->lastName ?></p>
                         </div>
                     </div>
                     <div class="row form-group">
                         <p class="control-label col-sm-3"><?= FIRST_NAME ?></p>
                         <div class="col-sm-9">
-                            <p><?= $viewTaxi->firstName ?></p>
+                            <p><?= $getbooking->firstName ?></p>
                         </div>
                     </div>
                     <div class="row form-group">
                         <p class="control-label col-sm-3"><?= SOCIETY ?></p>
                         <div class="col-sm-9">
-                            <p><?= $viewTaxi->society ?></p>
+                            <p><?= $getbooking->society ?></p>
                         </div>
                     </div>
                     <div class="row form-group">
                         <p class="control-label col-sm-3"><?= DESCRIBE_SOCIETY ?></p>
                         <div class="col-sm-9">
-                            <p><?= $viewTaxi->describeSociety ?></p>
+                            <p><?= $getbooking->describeSociety ?></p>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= POSTAL_CODE ?></p>
+                        <p class="control-label col-sm-3"><?= DATE_OF_DEPARTURE ?></p>
                         <div class="col-sm-9">
-                            <p><?= $viewTaxi->postalCode ?></p>
+                            <p><?= $getbooking->dateOfDepartur ?></p>
                         </div>
                     </div>
                     <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= CITY ?></p>
+                        <p class="control-label col-sm-3"><?= TIME_OF_ARRIVAL ?></p>
                         <div class="col-sm-9">
-                            <p><?= $viewTaxi->city ?></p>
+                            <p><?= $getbooking->timeOfArrival ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= FIRST_PHONE_NUMBER ?></p>
-                        <div class="col-sm-9">
-                            <p><?= $viewTaxi->firstPhoneNumber ?></p>
-                        </div>
-                    </div>
-                    <?php
-                    if (!empty($viewTaxi->secondPhoneNumber)) {
-                        ?>
-                        <div class="row form-group">
-                            <p class="control-label col-sm-3"><?= SECOND_PHONE_NUMBER ?></p>
-                            <div class="col-sm-9">
-                                <p><?= $viewTaxi->secondPhoneNumber ?></p>
-                            </div>
-                        </div>
-                    <?php } ?>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= ADDRESS ?></p>
-                        <div class="col-sm-9">
-                            <p><?= $viewTaxi->address ?></p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= EMAIL ?></p>
-                        <div class="col-sm-9">
-                            <p><?= $viewTaxi->email ?></p>
-                        </div>
-                    </div>
-                    <div class="row form-group">
-                        <div class="col-sm-offset-5 col-sm-3">
-                            <form action="taxiProfile.php" method="POST">
-                                <button type="submit" name="chooseTaxi" id="chooseTaxi" class="form-control"><?= CHOOSE_TAXI ?></button>
-                            </form>
-                        </div>
-                    </div>
+                <form action="myBooking.php" method="POST">
+                        <input type="hidden" name="idTaxi" id="idTaxi" value="<?= $getbooking->id ?>"/>
+                        <button type="submit" name="viewProfile" class="btn btn-success"><?= VIEW_PROFILE ?></button>
+                    </form>
+                    <hr>
                 <?php } ?>
             </div>
         </div>

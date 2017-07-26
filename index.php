@@ -43,13 +43,12 @@ include_once 'controller/indexController.php';
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (!empty($_SESSION)) { ?> 
-                            <form method="POST" action="index.php">
-                                <?php if (!empty($_SESSION['id_taxi_group'] == 1)) { ?> 
-                                    <a href="myBookin.php" class="btn btn-primary navbar-btn"><?= MY_BOOKING ?></a>
-                                <?php } ?>
-                                <a href="/modification" class="btn btn-success navbar-btn"><?= EDIT ?></a>
-                                <button name="logOut" type="submit" class="btn btn-warning navbar-btn" ><?= LOG_OUT ?></button>
-                            </form>
+                            <?php if (!empty($_SESSION['id_taxi_group'] == 1)) { ?> 
+                                <a href="myBooking.php" class="btn btn-primary navbar-btn"><?= MY_DIARY ?></a>
+                            <?php } ?>
+                            <a href="myBooking.php" title="Réservation" class="btn btn-default navbar-btn"><?= MY_BOOKING ?></a>
+                            <a href="/modification" class="btn btn-success navbar-btn"><?= EDIT ?></a>
+                            <a href="index.php?logOut" title="Se déconnecter" class="btn btn-warning navbar-btn"><?= LOG_OUT ?></a>
                             <?php
                         } else {
                             ?>
@@ -110,20 +109,12 @@ include_once 'controller/indexController.php';
                     ?>
                     <p><?= $message ?> </p>
                     <h2><?= USER_CONNECT ?></h2>
-                    <form action="/reservation" method="POST" class="form-vertical">
+                    <form action="/accueil" method="POST" class="form-vertical">
                         <div class="row form-group <?= isset($errorList['placeOfDeparture']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-3" for="placeOfDeparture"><?= DEPARTURE ?></label>
                             <div class="col-sm-9 ">
                                 <input list="placeDeparture" type="text" class="form-control" name="placeOfDeparture" id="placeOfDeparture" value="<?= $booking->placeOfDeparture ?>" autocomplete="off" required>
-                                <datalist id="placeDeparture">
-                                    <?php
-                                    foreach ($lisitLocation as $locationList) {
-                                        ?>
-                                        <option value="<?= $locationList->city ?>"><?= $locationList->city ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </datalist>
+                                <datalist id="placeDeparture"> </datalist>
                                 <p class = "help-block"><?= isset($errorList['placeOfDeparture']) ? $errorList['placeOfDeparture'] : '' ?></p>
                             </div>
                         </div>
@@ -137,16 +128,8 @@ include_once 'controller/indexController.php';
                         <div class="row form-group <?= isset($errorList['arrivalPoint']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-3" for="arrivalPoint"><?= ARRIVAL ?></label>
                             <div class="col-sm-9 ">
-                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint?>" autocomplete="off" required>
-                                <datalist id="destination">
-                                    <?php
-                                    foreach ($lisitLocation as $locationList) {
-                                        ?>
-                                        <option value="<?= $locationList->city ?>"><?= $locationList->city ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </datalist>
+                                <input list="destination" type="text" class="form-control" name="arrivalPoint" id="arrivalPoint" value="<?= $booking->arrivalPoint ?>" autocomplete="off" required>
+                                <datalist id="destination"> </datalist>
                                 <p class="help-block"><?= isset($errorList['arrivalPoint']) ? $errorList['arrivalPoint'] : '' ?></p>
                             </div>
                         </div>

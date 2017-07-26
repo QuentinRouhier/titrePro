@@ -189,5 +189,23 @@ class users extends database {
         $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
+    public function getbookingById() {
+        $query = 'SELECT `taxi_users`.`firstName`'
+                . ', `taxi_users`.`lastName`'
+                . ', `taxi_users`.`society`'
+                . ', `taxi_users`.`describeSociety`'
+                . ', `taxi_users`.`id`'
+                . ', `taxi_booking`.`dateOfDepartur`'
+                . ', `taxi_booking`.`timeOfArrival` '
+                . 'FROM `taxi_users` '
+                . 'INNER JOIN `taxi_booking` '
+                . 'ON `taxi_users`.`id` = `taxi_booking`.`id_taxi_users`'
+                . ' WHERE `taxi_booking`.`id_taxi_users` = :id';
+        $queryResult = $this->pdo->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $queryResult->execute();
+        $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
 
 }
