@@ -7,6 +7,7 @@ include_once 'lang/FR_FR.php';
 include_once 'model/users.php';
 include_once 'model/location.php';
 include_once 'model/booking.php';
+include_once 'model/comments.php';
 include_once 'controller/myTaxiBookingController.php';
 ?>
 <!DOCTYPE html>
@@ -41,6 +42,7 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
             </div>
         </nav>
+        <?= var_dump($_SESSION) ?>
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
                 <?php
@@ -113,12 +115,17 @@ include_once 'controller/myTaxiBookingController.php';
                 <?php } ?>
                 <hr>
                 <div class="row">
-                    <form action="taxiProfile.php" method="POST">
-                        <label class="control-label col-sm-5" for="comment"><?= COMMENT ?></label> :
+                    <form action="myTaxiBooking.php" method="POST">
+                        <label class="control-label col-sm-5" for="comment"><?= COMMENT ?></label>
                         <textarea type="text" name="comment" id="comment" placeholder="Laissez un commentaire" maxlength="150" required></textarea>
-                        <button type="submit" name="chooseTaxi" id="chooseTaxi" class="form-control"><?= CHOOSE_TAXI ?></button>
+                        <button type="submit" name="postComment" id="postComment" ><?= CHOOSE_TAXI ?></button>
                     </form>
                 </div>
+                <?php
+                foreach ($getComment as $viewComment) {
+                    ?>
+                <p> <?= $viewComment->content ?></p>
+                <?php } ?>
             </div>
         </div>
     </body>

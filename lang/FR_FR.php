@@ -78,6 +78,7 @@ define('BOOKING_ERROR_PLACE_DEPARTURE','Veuillez respecter la syntaxe suivante :
 define('BOOKING_ERROR_ARRIVAL_POINT','Veuillez respecter la syntaxe suivante : XXXXXX -> 00000');
 define('BOOKING_ERROR_ADDRESS_PLACE_DEPARTURE','L\'adresse doit comporter au moins 2 lettres et maximum 100');
 define('BOOKING_ERROR','Erreur durant la réservation.');
+define('REGEX_150_WORDS','Il faut minimum 2 caractere et maximum 150.');
 
 define('ADDRESS_ARRIVAL','Adresse d\'arriver : *');
 define('ADDRESS_DEPARTURE','Adresse de depart : *');

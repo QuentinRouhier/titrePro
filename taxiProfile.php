@@ -7,6 +7,7 @@ include_once 'lang/FR_FR.php';
 include_once 'model/users.php';
 include_once 'model/location.php';
 include_once 'model/booking.php';
+include_once 'model/comments.php';
 include_once 'controller/taxiProfileController.php';
 ?>
 <!DOCTYPE html>
@@ -117,6 +118,14 @@ include_once 'controller/taxiProfileController.php';
                                 <button type="submit" name="chooseTaxi" id="chooseTaxi" class="form-control"><?= CHOOSE_TAXI ?></button>
                             </form>
                         </div>
+                    </div>
+                <?php } ?>
+                <hr>
+                <?php
+                foreach ($getComment as $viewComment) {
+                    ?>
+                    <div class="row">
+                        <p> <?= $viewComment->content ?></p>
                     </div>
                 <?php } ?>
             </div>

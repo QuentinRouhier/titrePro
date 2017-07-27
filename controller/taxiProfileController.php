@@ -41,3 +41,6 @@ if (isset($_POST['chooseTaxi'])) {
         exit;
     }
 }
+    $comments = new comments();
+    $comments->id = intval($_SESSION['idTaxi']);
+    $getComment = $comments->getComment();
