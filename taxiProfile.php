@@ -47,72 +47,72 @@ include_once 'controller/taxiProfileController.php';
                 <?php
                 foreach ($getCityPostalCodeAndTaxiById as $viewTaxi) {
                     ?>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= LAST_NAME ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= LAST_NAME ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->lastName ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= FIRST_NAME ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= FIRST_NAME ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->firstName ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= SOCIETY ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= SOCIETY ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->society ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= DESCRIBE_SOCIETY ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= DESCRIBE_SOCIETY ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->describeSociety ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= POSTAL_CODE ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= POSTAL_CODE ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->postalCode ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= CITY ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= CITY ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->city ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= FIRST_PHONE_NUMBER ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= FIRST_PHONE_NUMBER ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->firstPhoneNumber ?></p>
                         </div>
                     </div>
                     <?php
                     if (!empty($viewTaxi->secondPhoneNumber)) {
                         ?>
-                        <div class="row form-group">
-                            <p class="control-label col-sm-3"><?= SECOND_PHONE_NUMBER ?></p>
-                            <div class="col-sm-9">
+                        <div class="row">
+                            <p class="control-label col-sm-4"><?= SECOND_PHONE_NUMBER ?></p>
+                            <div class="col-sm-8">
                                 <p><?= $viewTaxi->secondPhoneNumber ?></p>
                             </div>
                         </div>
                     <?php } ?>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= ADDRESS ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= ADDRESS ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->address ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= EMAIL ?></p>
-                        <div class="col-sm-9">
+                    <div class="row">
+                        <p class="control-label col-sm-4"><?= EMAIL ?></p>
+                        <div class="col-sm-8">
                             <p><?= $viewTaxi->email ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <div class="col-sm-offset-5 col-sm-3">
+                    <div class="row">
+                        <div class="col-sm-offset-5 col-sm-4">
                             <form action="taxiProfile.php" method="POST">
                                 <button type="submit" name="chooseTaxi" id="chooseTaxi" class="form-control"><?= CHOOSE_TAXI ?></button>
                             </form>

@@ -52,7 +52,7 @@ include_once 'controller/registerController.php';
             </div>
         </nav>
         <div class="container-fluid">
-            <h1 class="col-sm-offset-3"><?= !empty($_SESSION) ? UPDATE_USER : REGISTER_TITLE ?></h1>
+            <h1 class="text-center"><?= !empty($_SESSION) ? UPDATE_USER : REGISTER_TITLE ?></h1>
             <h2 class="text-center"><?= $message ?></h2>
             <form action="register.php" method="POST" class="form-vertical">
                 <div class="row form-group">
@@ -170,9 +170,7 @@ include_once 'controller/registerController.php';
                         <p class="help-block"><?= isset($errorList['confirmPassword']) ? $errorList['confirmPassword'] : '' ?></p>
                     </div>
                 </div>
-                <div class="row form-group col-md-offset-5">
-                    <button type="submit" name="register" class="btn btn-primary btn-lg"><?= !empty($_SESSION) ? UPDATE : REGISTER_REGISTER ?></button>
-                </div>
+                    <button type="submit" name="register" class="btn btn-primary btn-lg center-block"><?= !empty($_SESSION) ? UPDATE : REGISTER_REGISTER ?></button>
             </form>
         </div>
         <!-- pour le mask du telephone -->

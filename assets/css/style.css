@@ -37,3 +37,8 @@ hr:after {
  height: 100%;
  width: auto;
 }
+textarea{
+    resize: none;
+    height: 75px;
+    width: 100%;
+}

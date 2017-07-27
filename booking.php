@@ -46,31 +46,31 @@ include_once 'controller/bookingController.php';
                 <?php
                 foreach ($taxiBooking as $taxiList) {
                     ?>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= LAST_NAME ?></p>
-                        <div class="col-sm-9">
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= LAST_NAME ?></p>
+                        <div class="col-sm-8">
                             <p><?= $taxiList->lastName ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= FIRST_NAME ?></p>
-                        <div class="col-sm-9">
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= FIRST_NAME ?></p>
+                        <div class="col-sm-8">
                             <p><?= $taxiList->firstName ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= SOCIETY ?></p>
-                        <div class="col-sm-9">
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= SOCIETY ?></p>
+                        <div class="col-sm-8">
                             <p><?= $taxiList->society ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
-                        <p class="control-label col-sm-3"><?= DESCRIBE_SOCIETY ?></p>
-                        <div class="col-sm-9">
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= DESCRIBE_SOCIETY ?></p>
+                        <div class="col-sm-8">
                             <p><?= $taxiList->describeSociety ?></p>
                         </div>
                     </div>
-                    <div class="row form-group">
+                    <div class="row ">
                         <div class="col-sm-offset-5 col-sm-2">
                             <form action="booking.php" method="POST">
                                 <input type="hidden" name="idTaxi" id="idTaxi" value="<?= $taxiList->id ?>"/>

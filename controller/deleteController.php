@@ -1,5 +1,5 @@
 <?php
-
+$error = '';
 $users = new users();
 // Si le boutton delete est isset
 if (isset($_POST['delete'])) {
@@ -20,5 +20,7 @@ if (isset($_POST['delete'])) {
         //Tu la redirige sur l'index
         header('Location: /accueil?suppression_reussi');
         exit;
+    }else{
+        $error = 'le mot de passe est incorect';
     }
 }

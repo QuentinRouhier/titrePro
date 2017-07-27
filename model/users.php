@@ -189,18 +189,18 @@ class users extends database {
         $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
-    public function getbookingById() {
+    public function getBookingById() {
         $query = 'SELECT `taxi_users`.`firstName`'
                 . ', `taxi_users`.`lastName`'
-                . ', `taxi_users`.`society`'
-                . ', `taxi_users`.`describeSociety`'
-                . ', `taxi_users`.`id`'
-                . ', `taxi_booking`.`dateOfDepartur`'
-                . ', `taxi_booking`.`timeOfArrival` '
+                . ',`taxi_users`.`society`'
+                . ',`taxi_users`.`id`'
+                . ',`taxi_users`.`describeSociety`'
+                . ',`taxi_booking`.`dateOfDepartur`'
+                . ',`taxi_booking`.`timeOfArrival` '
                 . 'FROM `taxi_users` '
                 . 'INNER JOIN `taxi_booking` '
-                . 'ON `taxi_users`.`id` = `taxi_booking`.`id_taxi_users`'
-                . ' WHERE `taxi_booking`.`id_taxi_users` = :id';
+                . 'ON `taxi_users`.`id` = `taxi_booking`.`id_taxi_booked` '
+                . 'WHERE `taxi_users`.`id_taxi_group` = 1 AND `taxi_booking`.`id_taxi_users` = :id';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryResult->execute();

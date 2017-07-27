@@ -108,7 +108,7 @@ include_once 'controller/indexController.php';
                 } else {
                     ?>
                     <p><?= $message ?> </p>
-                    <h2><?= USER_CONNECT ?></h2>
+                    <h2 class="text-center"><?= USER_CONNECT ?></h2>
                     <form action="/accueil" method="POST" class="form-vertical">
                         <div class="row form-group <?= isset($errorList['placeOfDeparture']) ? 'has-error' : '' ?>">
                             <label class="control-label col-sm-3" for="placeOfDeparture"><?= DEPARTURE ?></label>

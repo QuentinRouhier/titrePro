@@ -1,4 +1,11 @@
 <?php
 $users = new users();
-$users->id = $_SESSION['id'];
-$getbookingById = $users->getbookingById();
+$users->id = intval($_SESSION['id']);
+$getBookingById = $users->getBookingById();
+
+if (isset($_POST['viewProfile'])) {
+$users->id = intval($_SESSION['idTaxi']);
+    $_SESSION['idTaxi'] = strip_tags($_POST['idTaxi']);
+    header('location: myTaxiBooking.php');
+    exit;
+}
