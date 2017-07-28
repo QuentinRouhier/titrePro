@@ -13,7 +13,7 @@ include_once 'controller/taxiProfileController.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Profile du taxi demandé</title>
+        <title>Profil du taxi demandé</title>
         <meta charset="UTF-8"/>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
@@ -121,13 +121,20 @@ include_once 'controller/taxiProfileController.php';
                     </div>
                 <?php } ?>
                 <hr>
-                <?php
-                foreach ($getComment as $viewComment) {
-                    ?>
-                    <div class="row">
-                        <p> <?= $viewComment->content ?></p>
-                    </div>
-                <?php } ?>
+                <div class="row">
+                    <p class="text-center"> <?= THE_COMMENT ?> </p>
+                    <?php
+                    foreach ($getComment as $viewComment) {
+                        ?>
+                        <div class="comment">
+                            <p class="col-sm-10"><?= $viewComment->firstName ?> :</p>
+                            <p> <?= PUBLISH_DATE, date_format(date_create($viewComment->publishDate), 'd/m/Y') ?> </p>
+                            <div class="borderComment">
+                                <p> <?= $viewComment->content ?></p>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </body>

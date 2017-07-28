@@ -207,5 +207,4 @@ class users extends database {
         $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
-
 }

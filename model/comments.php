@@ -18,7 +18,7 @@ class comments extends database {
     public $publishDate = '';
     public $id_taxi_users = 0;
     public $id_taxi_booking = 0;
-    
+
     /**
      * Déclaration de la méthode magique construct.
      * Le constructeur de la classe est appelé avec le mot clé new.
@@ -27,11 +27,11 @@ class comments extends database {
         parent::__construct();
         $this->connectDB();
     }
-    
+
     /**
      *  Fonction qui permet d'ajouter un commentaire dans la base de données
      */
-    public function addComment(){
+    public function addComment() {
         $query = 'INSERT INTO `taxi_comments` (`content`, `publishDate`, `id_taxi_users`, `id_taxi`) '
                 . 'VALUES (:content, NOW(), :id_taxi_users, :id_taxi)';
         $queryResult = $this->pdo->prepare($query);
@@ -40,18 +40,28 @@ class comments extends database {
         $queryResult->bindValue(':id_taxi', $this->id_taxi, PDO::PARAM_INT);
         return $queryResult->execute();
     }
-    
-    public function getComment(){
+
+    public function getComment() {
         $query = 'SELECT `taxi_comments`.`content` '
-                . ',`taxi_comments`.`publishDate` '
+                . ', `taxi_comments`.`publishDate` '
+                . ',`taxi_comments`.`id` '
+                . ',`taxi_users`.`firstName` '
+                . ',`taxi_users`.`id` as `userId` '
                 . 'FROM `taxi_comments` '
                 . 'INNER JOIN `taxi_users` '
-                . 'ON `taxi_comments`.`id_taxi` = `taxi_users`.`id` '
-                . 'WHERE `taxi_users`.`id` = :id';
+                . 'ON `taxi_comments`.`id_taxi_users` = `taxi_users`.`id` '
+                . 'WHERE `taxi_comments`.`id_taxi` = :id ';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryResult->execute();
         $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;
     }
+    public function deleteComment() {
+        $query = 'DELETE FROM `taxi_comments` WHERE `taxi_comments`.`id` = :id';
+        $queryResult = $this->pdo->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        return $queryResult->execute();
+    }
+
 }

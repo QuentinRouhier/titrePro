@@ -11,7 +11,7 @@ include_once 'controller/myBookingController.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Mes résérvation</title>
+        <title>Mes réservation</title>
         <meta charset="UTF-8"/>
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
@@ -72,7 +72,7 @@ include_once 'controller/myBookingController.php';
                     <div class="row ">
                         <p class="control-label col-sm-4"><?= DATE_OF_DEPARTURE ?></p>
                         <div class="col-sm-8">
-                            <p><?= $getBooking->dateOfDepartur ?></p>
+                            <p><?= date_format(date_create($getBooking->dateOfDepartur), 'd/m/Y') ?></p>
                         </div>
                     </div>
                     <div class="row ">

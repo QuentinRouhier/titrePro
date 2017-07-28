@@ -26,9 +26,7 @@ hr:after {
     background: #f0f0f0;
     color: #8c8b8b;
     font-size: 18px;
-    -webkit-transform: rotate(10deg);
-    -moz-transform: rotate(10deg);
-    transform: rotate(10deg);
+    border: yellow 1px solid;
 }
 .navbar-brand {
  padding: 0px;
@@ -41,4 +39,16 @@ textarea{
     resize: none;
     height: 75px;
     width: 100%;
+}
+.comment{
+    padding-top: 5px;
+    margin-bottom: 20px;
+    background-color: #56a6ff;
+}
+.borderComment{
+    padding-left: 5px;
+    border: 3px solid #56a6ff;
+    background-color: white;
+    height: 100px;
+    border-top: 0;
 }

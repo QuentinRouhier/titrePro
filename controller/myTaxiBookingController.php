@@ -7,6 +7,12 @@ $users->id = intval($_SESSION['idTaxi']);
 //Affiche les information dans une variable
 $getCityPostalCodeAndTaxiById = $users->getCityPostalCodeAndTaxiById();
 $comments = new comments();
+
+if (isset($_POST['deleteComment'])) {
+    $comments->id = strip_tags($_POST['idComment']);
+    $comments->deleteComment();
+}
+
 $regexMax150Characters = '/^(.){2,150}$/i';
 if (isset($_POST['postComment'])) {
     $comments->id_taxi = intval($_SESSION['idTaxi']);
@@ -18,7 +24,7 @@ if (isset($_POST['postComment'])) {
         if (!preg_match($regexMax150Characters, $sendComment)) {
             //tu mets une erreur
             $error = REGEX_150_WORDS;
-        }else{
+        } else {
             $comments->content = $sendComment;
             $comments->addComment();
         }
@@ -26,7 +32,7 @@ if (isset($_POST['postComment'])) {
     } else {
         $error = REGISTER_EMPTY_VALUE;
     }
-    
 }
 $comments->id = intval($_SESSION['idTaxi']);
 $getComment = $comments->getComment();
+

@@ -42,10 +42,10 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
             </div>
         </nav>
-        <?= var_dump($_SESSION) ?>
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
                 <?php
+                var_dump($_SESSION);
                 foreach ($getCityPostalCodeAndTaxiById as $viewTaxi) {
                     ?>
                     <div class="row">
@@ -118,14 +118,34 @@ include_once 'controller/myTaxiBookingController.php';
                     <form action="myTaxiBooking.php" method="POST">
                         <label class="control-label col-sm-5" for="comment"><?= COMMENT ?></label>
                         <textarea type="text" name="comment" id="comment" placeholder="Laissez un commentaire" maxlength="150" required></textarea>
-                        <button type="submit" name="postComment" id="postComment" ><?= CHOOSE_TAXI ?></button>
+                        <button type="submit" name="postComment" id="postComment" ><?= SEND ?></button>
                     </form>
                 </div>
-                <?php
-                foreach ($getComment as $viewComment) {
-                    ?>
-                <p> <?= $viewComment->content ?></p>
-                <?php } ?>
+                <hr>
+                <div class="row">
+                    <p class="text-center"> <?= THE_COMMENT ?> </p>
+                    <?php
+                    foreach ($getComment as $viewComment) {
+                        ?>
+                        <div class="comment">
+                            <p class="col-sm-10"><?= $viewComment->firstName ?> :</p>
+                            <p> <?= PUBLISH_DATE, date_format(date_create($viewComment->publishDate), 'd/m/Y') ?> </p>
+                            <div class="borderComment">
+                                <p> <?= $viewComment->content ?></p>
+                            </div>
+                            <?php
+                            if ($_SESSION['id'] == $viewComment->userId) {
+                                ?>
+                                <form action="myTaxiBooking.php" method="POST">
+                                    <input type="hidden" name="idComment" value="<?= $viewComment->id ?>"/>
+                                    <button type="submit" name="deleteComment" ><?= DELETE ?></button>
+                                </form>
+                                <?php
+                            }
+                            ?>
+                        </div>
+                    <?php } ?>
+                </div>
             </div>
         </div>
     </body>

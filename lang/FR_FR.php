@@ -95,5 +95,8 @@ define('DESCRIBE_SOCIETY','Déscription de la société : ');
 define('EMAIL','Adresse Mail :');
 define('VIEW_PROFILE','Voir le profil');
 define('CHOOSE_TAXI','Je résérve ce taxi');
+define('SEND','Envoyer');
 
 define('COMMENT','Commentaire');
+define('THE_COMMENT','Les commentaire(s) :');
+define('PUBLISH_DATE','posté le : ');
