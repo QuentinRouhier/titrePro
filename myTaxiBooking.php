@@ -23,9 +23,8 @@ include_once 'controller/myTaxiBookingController.php';
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#"><span class="signelogo">
-                                <img src="assets/images/logoTaxi.jpg" alt=""/>
-                            </span>
+                        <a class="navbar-brand" href="#">
+                            <img src="assets/images/logoTaxi.jpg" alt=""/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">

@@ -48,4 +48,25 @@ class booking extends database {
         $queryResult->bindValue(':id_taxi_booked', $this->id_taxi_booked, PDO::PARAM_INT);
         return $queryResult->execute();
     }
+    public function getOrganizerById() {
+        $query = 'SELECT `taxi_booking`.`placeOfDeparture`'
+                . ', `taxi_booking`.`postalCodeDeparture`'
+                . ', `taxi_booking`.`addressPlaceOfDeparture`'
+                . ', `taxi_booking`.`arrivalPoint`'
+                . ', `taxi_booking`.`postalCodeArrivalPoint`'
+                . ', `taxi_booking`.`addressArrivalPoint`'
+                . ', `taxi_booking`.`timeOfArrival`'
+                . ', `taxi_booking`.`dateOfDepartur`'
+                . ', `taxi_users`.`firstName`'
+                . ', `taxi_users`.`lastName` '
+                . 'FROM `taxi_booking` '
+                . 'INNER JOIN `taxi_users` '
+                . 'ON `taxi_booking`.`id_taxi_users` = `taxi_users`.`id` '
+                . 'WHERE `taxi_booking`.`id_taxi_booked` = :id';
+        $queryResult = $this->pdo->prepare($query);
+        $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
+        $queryResult->execute();
+        $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
+        return $result;
+    }
 }

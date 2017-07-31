@@ -59,7 +59,7 @@ define('SIGN_UP','Inscription');
 define('SIGN_IN','Connexion');
 define('LOG_OUT','Déconnexion');
 define('CLOSE','Fermer');
-define('MY_DIARY','Agenda');
+define('ORGANIZER','Agenda');
 define('MY_BOOKING','Mes réservation');
 define('EDIT','Profil');
 
@@ -67,7 +67,7 @@ define('DEPARTURE','Départ : *');
 define('ARRIVAL','Arrivé : *');
 define('TIME_ARRIVAL','Heure d\'arrivé : *');
 define('DATE_DEPARTURE','Date : *');
-define('TIME_OF_ARRIVAL','Heure d\'arrivé ');
+define('TIME_OF_ARRIVAL','Heure d\'arrivé :');
 define('DATE_OF_DEPARTURE','Date ');
 define('BOOKING','Réservation');
 
@@ -100,3 +100,9 @@ define('SEND','Envoyer');
 define('COMMENT','Commentaire');
 define('THE_COMMENT','Les commentaire(s) :');
 define('PUBLISH_DATE','posté le : ');
+define('ADDRESS_OF_DEPARTURE','Adresse de départ :');
+define('PLACE_ARRIVAL','Arrivé :');
+define('DEPARTURE_POSTAl_CODE','Départ :');
+define('ARRIVAL_POSTAl_CODE','Arrivé :');
+define('ADDRESS_OF_ARRIVAL','Adresse d\'arrivé :');
+define('DATE_OF_ARRIVAL','Date d\'arrivé :');

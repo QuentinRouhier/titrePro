@@ -44,7 +44,7 @@ include_once 'controller/indexController.php';
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (!empty($_SESSION)) { ?> 
                             <?php if (!empty($_SESSION['id_taxi_group'] == 1)) { ?> 
-                                <a href="myBooking.php" class="btn btn-primary navbar-btn"><?= MY_DIARY ?></a>
+                                <a href="organizer.php" class="btn btn-primary navbar-btn"><?= ORGANIZER ?></a>
                             <?php } ?>
                             <a href="myBooking.php" title="Réservation" class="btn btn-default navbar-btn"><?= MY_BOOKING ?></a>
                             <a href="/modification" class="btn btn-success navbar-btn"><?= EDIT ?></a>

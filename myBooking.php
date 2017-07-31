@@ -81,6 +81,30 @@ include_once 'controller/myBookingController.php';
                             <p><?= $getBooking->timeOfArrival ?></p>
                         </div>
                     </div>
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= DEPARTURE_POSTAl_CODE ?></p>
+                        <div class="col-sm-8">
+                            <p><?= $getBooking->postalCodeDeparture ?> <?= $getBooking->placeOfDeparture ?></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= ADDRESS_OF_DEPARTURE ?></p>
+                        <div class="col-sm-8">
+                            <p><?= $getBooking->addressPlaceOfDeparture ?></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= ARRIVAL_POSTAl_CODE ?></p>
+                        <div class="col-sm-8">
+                            <p><?= $getBooking->postalCodeArrivalPoint?> <?= $getBooking->arrivalPoint ?></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= ADDRESS_OF_ARRIVAL ?></p>
+                        <div class="col-sm-8">
+                            <p><?= $getBooking->addressArrivalPoint ?></p>
+                        </div>
+                    </div>
                     <form action="myBooking.php" method="POST">
                         <input type="hidden" name="idTaxi" id="idTaxi" value="<?= $getBooking->id ?>"/>
                         <button type="submit" name="viewProfile" class="btn btn-success"><?= VIEW_PROFILE ?></button>
