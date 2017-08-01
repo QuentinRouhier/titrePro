@@ -58,11 +58,14 @@ class booking extends database {
                 . ', `taxi_booking`.`timeOfArrival`'
                 . ', `taxi_booking`.`dateOfDepartur`'
                 . ', `taxi_users`.`firstName`'
+                . ', `taxi_users`.`firstPhoneNumber`'
+                . ', `taxi_users`.`secondPhoneNumber`'
                 . ', `taxi_users`.`lastName` '
                 . 'FROM `taxi_booking` '
                 . 'INNER JOIN `taxi_users` '
                 . 'ON `taxi_booking`.`id_taxi_users` = `taxi_users`.`id` '
-                . 'WHERE `taxi_booking`.`id_taxi_booked` = :id';
+                . 'WHERE `taxi_booking`.`id_taxi_booked` = :id '
+                . 'ORDER BY `taxi_users`.`id` DESC';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryResult->execute();

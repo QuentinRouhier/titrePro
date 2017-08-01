@@ -99,6 +99,7 @@ define('SEND','Envoyer');
 
 define('COMMENT','Commentaire');
 define('THE_COMMENT','Les commentaire(s) :');
+define('NO_COMMENTS','Vous n\'avez pas de commentaires');
 define('PUBLISH_DATE','posté le : ');
 define('ADDRESS_OF_DEPARTURE','Adresse de départ :');
 define('PLACE_ARRIVAL','Arrivé :');
@@ -106,3 +107,5 @@ define('DEPARTURE_POSTAl_CODE','Départ :');
 define('ARRIVAL_POSTAl_CODE','Arrivé :');
 define('ADDRESS_OF_ARRIVAL','Adresse d\'arrivé :');
 define('DATE_OF_ARRIVAL','Date d\'arrivé :');
+define('PHONE_CLIENT','Numéros de téléphone :');
+define('PHONE_CLIENT_2','Second Numéros de téléphone :');

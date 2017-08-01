@@ -12,16 +12,18 @@ include_once 'controller/deleteController.php';
     <head>
         <title>Suppression de votre compte</title>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="assets/images/favicon.ico">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+        <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#"><span class="signelogo">
-                                <img src="assets/images/logoTaxi.jpg" alt=""/>
-                            </span>
+                        <a class="navbar-brand" href="/accueil">
+                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
@@ -33,7 +35,7 @@ include_once 'controller/deleteController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
+                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
                         <?php
                         if (!empty($_SESSION)) {
                             ?>
@@ -58,5 +60,6 @@ include_once 'controller/deleteController.php';
                 <button type="submit" name="delete" class="btn btn-danger btn-lg center-block">supprimer</button>
             </form>
         </div>
+        <?php include_once 'footer.php' ?>
     </body>
 </html>

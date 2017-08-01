@@ -15,6 +15,8 @@ include_once 'controller/myTaxiBookingController.php';
     <head>
         <title>Mes résérvation</title>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="assets/images/favicon.ico">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -23,8 +25,8 @@ include_once 'controller/myTaxiBookingController.php';
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
-                            <img src="assets/images/logoTaxi.jpg" alt=""/>
+                        <a class="navbar-brand" href="/accueil">
+                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
@@ -36,7 +38,7 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
+                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
                     </ul>
                 </div>
             </div>
@@ -147,5 +149,6 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
             </div>
         </div>
+        <?php include_once 'footer.php' ?>
     </body>
 </html>

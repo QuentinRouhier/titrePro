@@ -14,6 +14,6 @@ $taxiBooking = $users->searchTaxiByPostalCodeDeparture();
 
 if (isset($_POST['viewProfile'])) {
     $_SESSION['idTaxi'] = strip_tags($_POST['idTaxi']);
-    header('location: taxiProfile.php');
+    header('location: /profil_taxi');
     exit;
 }

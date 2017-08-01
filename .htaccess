@@ -8,5 +8,10 @@ RewriteRule ^accueil$ /index.php?message_reussite
 RewriteRule ^modification$ /register.php
 RewriteRule ^inscription$ /register.php
 RewriteRule ^reservation$ /booking.php
-RewriteRule ^taxiBooking$ /taxiProfile.php
+RewriteRule ^profil_taxi$ /taxiProfile.php
+RewriteRule ^mes_reservation$ /myBooking.php
+RewriteRule ^ma_reservation$ /myTaxiBooking.php
+RewriteRule ^mes_commentaires$ /comment.php
+RewriteRule ^suppression$ /delete.php
+RewriteRule ^agenda$ /organizer.php
 </IfModule>

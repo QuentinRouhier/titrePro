@@ -206,7 +206,8 @@ class users extends database {
                 . 'FROM `taxi_users` '
                 . 'INNER JOIN `taxi_booking` '
                 . 'ON `taxi_users`.`id` = `taxi_booking`.`id_taxi_booked` '
-                . 'WHERE `taxi_users`.`id_taxi_group` = 1 AND `taxi_booking`.`id_taxi_users` = :id';
+                . 'WHERE `taxi_users`.`id_taxi_group` = 1 AND `taxi_booking`.`id_taxi_users` = :id '
+                . 'ORDER BY `taxi_users`.`id` DESC';
         $queryResult = $this->pdo->prepare($query);
         $queryResult->bindValue(':id', $this->id, PDO::PARAM_INT);
         $queryResult->execute();

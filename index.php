@@ -14,6 +14,8 @@ include_once 'controller/indexController.php';
     <head>
         <title>taxi</title>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="assets/images/favicon.ico">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
         <!--Css du timepicker-->
@@ -29,8 +31,8 @@ include_once 'controller/indexController.php';
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
-                            <img src="assets/images/logoTaxi.jpg" alt=""/>
+                        <a class="navbar-brand" href="/accueil">
+                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
@@ -44,9 +46,9 @@ include_once 'controller/indexController.php';
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (!empty($_SESSION)) { ?> 
                             <?php if (!empty($_SESSION['id_taxi_group'] == 1)) { ?> 
-                                <a href="organizer.php" class="btn btn-primary navbar-btn"><?= ORGANIZER ?></a>
+                                <a href="/agenda" class="btn btn-primary navbar-btn"><?= ORGANIZER ?></a>
                             <?php } ?>
-                            <a href="myBooking.php" title="Réservation" class="btn btn-default navbar-btn"><?= MY_BOOKING ?></a>
+                            <a href="/mes_reservation" title="Réservation" class="btn btn-default navbar-btn"><?= MY_BOOKING ?></a>
                             <a href="/modification" class="btn btn-success navbar-btn"><?= EDIT ?></a>
                             <a href="index.php?logOut" title="Se déconnecter" class="btn btn-warning navbar-btn"><?= LOG_OUT ?></a>
                             <?php
@@ -70,7 +72,7 @@ include_once 'controller/indexController.php';
                         </button>
                         <h2 class="modal-title"><?= SIGN_IN ?></h2>
                     </div>
-                    <form action="index.php" method="POST">
+                    <form action="/accueil" method="POST">
                         <div class="modal-body">
                             <div id="errorLogin"><?= LOGINE ?></div>
                             <div class="row form-group">
@@ -163,6 +165,7 @@ include_once 'controller/indexController.php';
                 <?php } ?>
             </div>
         </div>
+        <?php include_once 'footer.php' ?>
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <!-- JS fenetre modal -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

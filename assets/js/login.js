@@ -20,7 +20,7 @@ $(function () {
                             $('#errorLogin').css('color', 'red');
                             $('#errorLogin').css('text-align','center');
                         }else if(error == false){
-                            window.location.href = '/index.php';
+                            window.location.href = '/accueil';
                         }
                     },
                     'JSON');

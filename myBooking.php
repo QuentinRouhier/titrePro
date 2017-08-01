@@ -13,6 +13,8 @@ include_once 'controller/myBookingController.php';
     <head>
         <title>Mes réservation</title>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="assets/images/favicon.ico">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -21,9 +23,8 @@ include_once 'controller/myBookingController.php';
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#"><span class="signelogo">
-                                <img src="assets/images/logoTaxi.jpg" alt=""/>
-                            </span>
+                        <a class="navbar-brand" href="/accueil">
+                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
@@ -35,7 +36,7 @@ include_once 'controller/myBookingController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
+                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
                     </ul>
                 </div>
             </div>
@@ -105,7 +106,7 @@ include_once 'controller/myBookingController.php';
                             <p><?= $getBooking->addressArrivalPoint ?></p>
                         </div>
                     </div>
-                    <form action="myBooking.php" method="POST">
+                    <form action="/ma_reservation" method="POST">
                         <input type="hidden" name="idTaxi" id="idTaxi" value="<?= $getBooking->id ?>"/>
                         <button type="submit" name="viewProfile" class="btn btn-success"><?= VIEW_PROFILE ?></button>
                     </form>
@@ -113,5 +114,6 @@ include_once 'controller/myBookingController.php';
                 <?php } ?>
             </div>
         </div>
+        <?php include_once 'footer.php' ?>
     </body>
 </html>

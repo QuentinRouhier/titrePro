@@ -13,6 +13,8 @@ include_once 'controller/organizerController.php';
     <head>
         <title>Mon agenda</title>
         <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="assets/images/favicon.ico">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
@@ -21,8 +23,8 @@ include_once 'controller/organizerController.php';
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
-                            <img src="assets/images/logoTaxi.jpg" alt=""/>
+                        <a class="navbar-brand" href="/accueil">
+                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
@@ -34,7 +36,7 @@ include_once 'controller/organizerController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
+                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
                     </ul>
                 </div>
             </div>
@@ -84,11 +86,26 @@ include_once 'controller/organizerController.php';
                             <p><?= date_format(date_create($organizer->dateOfDepartur), 'd/m/Y') ?></p>
                         </div>
                     </div>
+                    <div class="row">
+                        <p class="control-label col-sm-2"><?= PHONE_CLIENT ?></p>
+                        <div class="col-sm-4">
+                            <p><?= $organizer->firstPhoneNumber ?></p>
+                        </div>
+                        <?php
+                        if (!empty($organizer->secondPhoneNumber)) {
+                            ?>
+                            <p class="control-label col-sm-2"><?= PHONE_CLIENT_2 ?></p>
+                            <div class="col-sm-4">
+                                <p><?= $organizer->secondPhoneNumber ?></p>
+                            </div>
+                        <?php } ?>
+                    </div>
                     <hr>
                     <?php
                 }
                 ?>
             </div>
         </div>
+        <?php include_once 'footer.php' ?>
     </body>
 </html>

@@ -12,8 +12,10 @@ include_once 'controller/registerController.php';
 <!DOCTYPE html>
 <html>
     <head>
-        <meta charset="UTF-8">
         <title><?= !empty($_SESSION) ? 'Profil' : 'Inscription' ?></title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link rel="icon" href="assets/images/favicon.ico">
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <!--Css du datepicker-->
         <link href="assets/css/bootstrap-datepicker3.css" rel="stylesheet" type="text/css"/>
@@ -27,9 +29,8 @@ include_once 'controller/registerController.php';
             <div class="container-fluid">
                 <div class="navbar-header">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#"><span class="signelogo">
-                                <img src="assets/images/logoTaxi.jpg" alt=""/>
-                            </span>
+                        <a class="navbar-brand" href="/accueil">
+                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
                     </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
@@ -41,12 +42,19 @@ include_once 'controller/registerController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="index.php" class="btn btn-success navbar-btn" >Accueil</a>
+                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
                         <?php
                         if (!empty($_SESSION)) {
                             ?>
-                            <a href="delete.php" class="btn btn-success navbar-btn">Supprimer votre compte  </a>
-                        <?php } ?>
+                            <a href="/suppression" class="btn btn-success navbar-btn">Supprimer votre compte  </a>
+                            <?php
+                            if ($_SESSION['id_taxi_group'] == 1) {
+                                ?>
+                                <a href="/mes_commentaires" class="btn btn-success navbar-btn">Voir mes commentaires  </a>
+                                <?php
+                            }
+                        }
+                        ?>
                     </ul>
                 </div>
             </div>
@@ -170,9 +178,10 @@ include_once 'controller/registerController.php';
                         <p class="help-block"><?= isset($errorList['confirmPassword']) ? $errorList['confirmPassword'] : '' ?></p>
                     </div>
                 </div>
-                    <button type="submit" name="register" class="btn btn-primary btn-lg center-block"><?= !empty($_SESSION) ? UPDATE : REGISTER_REGISTER ?></button>
+                <button type="submit" name="register" class="btn btn-primary btn-lg center-block"><?= !empty($_SESSION) ? UPDATE : REGISTER_REGISTER ?></button>
             </form>
         </div>
+        <?php include_once 'footer.php' ?>
         <!-- pour le mask du telephone -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>

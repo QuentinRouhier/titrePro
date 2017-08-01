@@ -5,14 +5,13 @@ include_once 'configuration.php';
 include_once 'class/database.php';
 include_once 'lang/FR_FR.php';
 include_once 'model/users.php';
-include_once 'model/location.php';
-include_once 'model/booking.php';
-include_once 'controller/bookingController.php';
+include_once 'model/comments.php';
+include_once 'controller/commentController.php';
 ?>
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Réservation</title>
+        <title>Mes commentaires</title>
         <meta charset="UTF-8"/>
         <meta name="viewport" content="width=device-width">
         <link rel="icon" href="assets/images/favicon.ico">
@@ -45,41 +44,26 @@ include_once 'controller/bookingController.php';
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
                 <?php
-                foreach ($taxiBooking as $taxiList) {
+                if (empty($viewComment->content)) {
                     ?>
-                    <div class="row ">
-                        <p class="control-label col-sm-4"><?= LAST_NAME ?></p>
-                        <div class="col-sm-8">
-                            <p><?= $taxiList->lastName ?></p>
-                        </div>
+                    <div class="row">
+                        <p class="text-center"> <?= THE_COMMENT ?> </p>
+                        <?php
+                        foreach ($getComment as $viewComment) {
+                            ?>
+                            <div class="comment">
+                                <p class="col-sm-10"><?= $viewComment->firstName ?> <?= $viewComment->lastName ?> :</p>
+                                <p> <?= PUBLISH_DATE, date_format(date_create($viewComment->publishDate), 'd/m/Y') ?> </p>
+                                <div class="borderComment">
+                                    <p> <?= $viewComment->content ?></p>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        ?>
+                        <p class="col-sm-10"><?= NO_COMMENTS ?></p> 
                     </div>
-                    <div class="row ">
-                        <p class="control-label col-sm-4"><?= FIRST_NAME ?></p>
-                        <div class="col-sm-8">
-                            <p><?= $taxiList->firstName ?></p>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <p class="control-label col-sm-4"><?= SOCIETY ?></p>
-                        <div class="col-sm-8">
-                            <p><?= $taxiList->society ?></p>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <p class="control-label col-sm-4"><?= DESCRIBE_SOCIETY ?></p>
-                        <div class="col-sm-8">
-                            <p><?= $taxiList->describeSociety ?></p>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col-sm-offset-5 col-sm-2">
-                            <form action="booking.php" method="POST">
-                                <input type="hidden" name="idTaxi" id="idTaxi" value="<?= $taxiList->id ?>"/>
-                                <button type="submit" name="viewProfile" class="btn btn-success"><?= VIEW_PROFILE ?></button>
-                            </form>
-                        </div>
-                    </div>
-                    <hr>
                 <?php } ?>
             </div>
         </div>

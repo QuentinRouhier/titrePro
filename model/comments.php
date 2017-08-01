@@ -46,6 +46,7 @@ class comments extends database {
                 . ', `taxi_comments`.`publishDate` '
                 . ',`taxi_comments`.`id` '
                 . ',`taxi_users`.`firstName` '
+                . ',`taxi_users`.`lastName` '
                 . ',`taxi_users`.`id` as `userId` '
                 . 'FROM `taxi_comments` '
                 . 'INNER JOIN `taxi_users` '
