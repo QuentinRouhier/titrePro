@@ -24,11 +24,9 @@ include_once 'controller/taxiProfileController.php';
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="navbar-header">
                         <a class="navbar-brand" href="/accueil">
                             <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
-                    </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -38,7 +36,8 @@ include_once 'controller/taxiProfileController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
+                        <li><a href="/accueil" >Accueil</a></li>
+                        <li><a href="/reservation" >Tous les taxis</a></li>
                     </ul>
                 </div>
             </div>
@@ -139,5 +138,8 @@ include_once 'controller/taxiProfileController.php';
             </div>
         </div>
         <?php include_once 'footer.php' ?>
+        <!-- Pour fair fonctionner la navbar en responsive -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

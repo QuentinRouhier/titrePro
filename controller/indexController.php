@@ -1,6 +1,5 @@
 <?php
-
-// Si verifEmail et verifPassword sont fixer(isset) (ajax) 
+// Si verifEmail et verifPassword sont envoyer en post par ajax et qu'il sont set (fixer)
 if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     // Tu démares la session
     session_start();
@@ -47,28 +46,32 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
 } else {
     //si il n'y a personne de connecter
     if (isset($_SESSION)) {
-        //Instanciation de la classe users pour la connexion (c'est juste pour la value si il ce trompe)
+        //Instanciation de la classe users pour la connexion (pour la value dans la modal)
         $users = new users();
     }
 // si logOut est isset tu deconnect la personne 
     if (isset($_GET['logOut'])) {
+        //Détruit toutes les variables d'une session
         session_unset();
+        //Détruit la session
         session_destroy();
+        //redirection vers l'accueil
         header('location: /accueil');
+        //On s'assure que la suite du code ne soit pas exécutée une fois la redirection effectuée.
         exit;
     }
 // Les message de reussite de l'inscription et de la modification
     $message = '';
-    //si message_reussite et passer en parametre la variable $message contient un message
-    if (isset($_GET['message_reussite'])) {
+    //si r et passer en parametre la variable $message contient un message
+    if (isset($_GET['r'])) {
         $message = REGISTER_SUCCESS_SEND;
     }
-    //si message_reussite et passer en parametre la variable $message contient un message
-    if (isset($_GET['suppression_reussi'])) {
+    //si d et passer en parametre la variable $message contient un message
+    if (isset($_GET['d'])) {
         $message = DELETE_SUCCESS_SEND;
     }
-    //si modification_reussite et passer en parametre la variable $message contient un message
-    if (isset($_GET['modification_reussite'])) {
+    //si u et passer en parametre la variable $message contient un message
+    if (isset($_GET['u'])) {
         $message = REGISTER_SUCCESS_UPDATE;
     }
 
@@ -80,7 +83,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
         include_once '../class/database.php';
         include_once '../model/location.php';
         include_once '../model/booking.php';
-        //Instanciation de la classe location
+        //Instanciation de la classe booking et location
         $booking = new booking();
         $location = new location();
         //Tu ajoute ce qu'il y a dans le post dans l'attribu city
@@ -95,8 +98,8 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
         include_once '../class/database.php';
         include_once '../model/location.php';
         include_once '../model/booking.php';
+        //Instanciation de la classe booking et location
         $booking = new booking();
-        //Instanciation de la classe location
         $location = new location();
         //Tu ajoute ce qu'il y a dans le post dans l'attribu city
         $location->city = $_POST['searchArrivalPoint'];
@@ -107,7 +110,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
     } else {
         // instantiation de la class booking
         $booking = new booking();
-// cration d'un tableau errorList utiliser tout au long du processuce de reservation 
+        // cration d'un tableau errorList utiliser tout au long du processuce de reservation 
         $errorList = array();
 
         if (isset($_POST['booking'])) {
@@ -122,6 +125,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
                     //Tu mets une erreur
                     $errorList['placeOfDeparture'] = BOOKING_ERROR_PLACE_DEPARTURE;
                 } else {
+                    // si il n'y a pas d'erreur tu mets la variable dans la variable de session
                     $_SESSION['placeOfDeparture'] = $placeOfDeparture;
                 }
                 //Sinon tu mets une erreur
@@ -136,6 +140,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
                     //Tu mets une erreur
                     $errorList['addressPlaceOfDeparture'] = BOOKING_ERROR_ADDRESS_PLACE_DEPARTURE;
                 } else {
+                    // si il n'y a pas d'erreur tu mets la variable dans la variable de session
                     $_SESSION['addressPlaceOfDeparture'] = $addressPlaceOfDeparture;
                 }
                 //Sinon tu mets une erreur
@@ -150,6 +155,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
                     //Tu mets une erreur
                     $errorList['arrivalPoint'] = BOOKING_ERROR_ARRIVAL_POINT;
                 } else {
+                    // si il n'y a pas d'erreur tu mets la variable dans la variable de session
                     $_SESSION['arrivalPoint'] = $arrivalPoint;
                 }
                 //Sinon tu mets une erreur
@@ -164,6 +170,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
                     //Tu mets une erreur
                     $errorList['addressArrivalPoint'] = BOOKING_ERROR_ARRIVAL_POINT;
                 } else {
+                    // si il n'y a pas d'erreur tu mets la variable dans la variable de session
                     $_SESSION['addressArrivalPoint'] = $addressArrivalPoint;
                 }
                 //Sinon tu mets une erreur
@@ -174,6 +181,7 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
             if (!empty($_POST['dateOfDepartur'])) {
                 // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
                 $dateOfDepartur = strip_tags($_POST['dateOfDepartur']);
+                // Puis le mets dans la variable de session
                 $_SESSION['dateOfDepartur'] = $dateOfDepartur;
                 //Sinon tu mets une erreur
             } else {
@@ -183,15 +191,19 @@ if (isset($_POST['verifEmail']) && isset($_POST['verifPassword'])) {
             if (!empty($_POST['timeOfArrival'])) {
                 // tu passe en POST la value qui es de dans puis tu le mets dans l'attribut correspondant
                 $timeOfArrival = strip_tags($_POST['timeOfArrival']);
+                // Puis le mets dans la variable de session
                 $_SESSION['timeOfArrival'] = $timeOfArrival;
                 //Sinon tu mets une erreur
             } else {
                 $errorList['timeOfArrival'] = BOOKING_EMPTY_VALUE;
             }
+            //si il y a une ou plus tu mets un message d'erreur dans la varialbe $message
             if (!count($errorList) == 0) {
                 $message = BOOKING_ERROR;
+                //Sinon tu redirige vers la page reservation
             } else {
                 header('location: /reservation');
+                //On s'assure que la suite du code ne soit pas exécutée une fois la redirection effectuée.
                 exit;
             }
         }

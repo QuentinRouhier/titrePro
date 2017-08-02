@@ -109,3 +109,5 @@ define('ADDRESS_OF_ARRIVAL','Adresse d\'arrivé :');
 define('DATE_OF_ARRIVAL','Date d\'arrivé :');
 define('PHONE_CLIENT','Numéros de téléphone :');
 define('PHONE_CLIENT_2','Second Numéros de téléphone :');
+define('NO_BOOKING','Vous n\'avez pas fait de réservation.');
+define('FALSE_PSW','Le mot de passe est incorect.');

@@ -4,9 +4,10 @@
 if (!empty($_SESSION)) {
     //Instanciation de la classe location
     $location = new location();
+    $location->postalCode = intval($_SESSION['id_taxi_location']);
     //appel de la méthode getListLocation pour pouvoir construire la liste déroulante
     // et afficher le bon code postal lors de la modification du profil
-    $locationsListt = $location->getListLocation($_SESSION['id_taxi_location']);
+    $locationsListt = $location->getListLocation();
 }
 
 
@@ -218,7 +219,7 @@ if (isset($_POST['search'])) {
                     $message = REGISTER_ERROR_UPDATE;
                     //Sinon tu redirige la page sur l'index
                 } else {
-                    header('Location: /accueil?modification_reussite');
+                    header('Location: /accueil?u');
                     $_SESSION['id'] = $users->id;
                     $_SESSION['lastName'] = $users->lastName;
                     $_SESSION['firstName'] = $users->firstName;
@@ -240,7 +241,7 @@ if (isset($_POST['search'])) {
                     $message = REGISTER_ERROR_SEND;
                     //Sinon tu redirige la page sur l'index
                 } else {
-                    header('Location: /accueil?message_reussite');
+                    header('Location: /accueil?r');
                     exit;
                 }
             }

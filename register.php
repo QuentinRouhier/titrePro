@@ -28,11 +28,9 @@ include_once 'controller/registerController.php';
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/accueil">
-                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
-                        </a>
-                    </div>
+                    <a class="navbar-brand" href="/accueil">
+                        <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
+                    </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -40,17 +38,20 @@ include_once 'controller/registerController.php';
                         <span class="icon-bar"></span>
                     </button>
                 </div>
+                <?php var_dump($_SESSION) ?>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
+                        <li><a href="/accueil">Accueil</a></li>
                         <?php
+                        // si la session n'est pas vide tu affiche "supprimer votre comptre"
                         if (!empty($_SESSION)) {
                             ?>
-                            <a href="/suppression" class="btn btn-success navbar-btn">Supprimer votre compte  </a>
+                            <li><a href="/suppression">Supprimer votre compte  </a></li>
                             <?php
+                            // si id taxi group = 1 donc qu'il est taxi tu affiche "voir les commentaire"
                             if ($_SESSION['id_taxi_group'] == 1) {
                                 ?>
-                                <a href="/mes_commentaires" class="btn btn-success navbar-btn">Voir mes commentaires  </a>
+                                <li><a href="/mes_commentaires">Voir mes commentaires  </a></li>
                                 <?php
                             }
                         }
@@ -123,7 +124,7 @@ include_once 'controller/registerController.php';
                 <div class="row form-group">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="postalCode"><?= REGISTER_POSTALCODE ?></label>
                     <div class="col-sm-4 <?= isset($errorList['postalCode']) ? 'has-error' : '' ?>">
-                        <input autocomplete="off" list="postal_code" type="text" class="form-control" name="postalCode" id="postalCode" value="<?= !empty($_SESSION) ? $locationsListt->postalCode : $users->postalCode ?>" minlength="5" maxlength="5" required>
+                        <input autocomplete="off" list="postal_code" type="text" class="form-control" name="postalCode" id="postalCode" value="<?= !empty($_SESSION) ? $locationsListt[0]->postalCode : $users->postalCode ?>" minlength="5" maxlength="5" required>
                         <p class="help-block"><?= isset($errorList['postalCode']) ? $errorList['postalCode'] : '' ?></p>
                     </div>
                 </div>
@@ -133,9 +134,9 @@ include_once 'controller/registerController.php';
                         <select type="text" class="form-control" name="city" id="city" >
                             <?php
                             if (isset($_SESSION['id'])) {
-                                foreach ($locationsList as $locationsDetails) {
+                                foreach ($locationsListt as $locationsDetails) {
                                     ?>
-                                    <option value="<?= $locationsDetails->id_taxi_location ?>" <?= $locationsDetails->city == $_SESSION['city'] ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
+                            <option value="<?= $locationsDetails->city ?>" <?= $_SESSION && $locationsDetails->city == $location->city ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
                                     <?php
                                 }
                             }
@@ -185,6 +186,8 @@ include_once 'controller/registerController.php';
         <!-- pour le mask du telephone -->
         <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/js/jasny-bootstrap.min.js"></script>
+        <!-- Pour fair fonctionner la navbar en responsive -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
         <!--Js du date picker et la locale pour le français -->
         <script src="assets/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
         <script src="assets/js/bootstrap-datepicker.fr.min.js" type="text/javascript"></script>

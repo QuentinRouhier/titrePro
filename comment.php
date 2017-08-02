@@ -36,7 +36,12 @@ include_once 'controller/commentController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
+                        <li><a href="/accueil" >Accueil</a></li>
+                        <?php
+                        if (!empty($_SESSION)) {
+                            ?>
+                            <li><a href="/modification" ><?= EDIT ?></a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>
@@ -68,5 +73,8 @@ include_once 'controller/commentController.php';
             </div>
         </div>
         <?php include_once 'footer.php' ?>
+        <!-- Pour fair fonctionner la navbar en responsive -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

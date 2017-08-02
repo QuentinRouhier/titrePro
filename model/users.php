@@ -159,9 +159,10 @@ class users extends database {
                 . 'FROM `taxi_users` '
                 . 'INNER JOIN `taxi_location` '
                 . 'ON `taxi_users`.`id_taxi_location` = `taxi_location`.`id` '
-                . 'WHERE `taxi_location`.`postalCode` LIKE :postalCode AND `taxi_users`.`id_taxi_group` = 1';
+                . 'WHERE `taxi_location`.`postalCode` '
+                . 'LIKE :postalCode AND `taxi_users`.`id_taxi_group` = 1';
         $queryResult = $this->pdo->prepare($query);
-        $queryResult->bindValue(':postalCode', $this->postalCode . '%', PDO::PARAM_STR);
+        $queryResult->bindValue(':postalCode', substr($this->postalCode, 0, 2) . '%', PDO::PARAM_INT);
         $queryResult->execute();
         $result = $queryResult->fetchAll(PDO::FETCH_OBJ);
         return $result;

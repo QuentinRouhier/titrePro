@@ -24,11 +24,9 @@ include_once 'controller/myTaxiBookingController.php';
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/accueil">
-                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
-                        </a>
-                    </div>
+                    <a class="navbar-brand" href="/accueil">
+                        <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
+                    </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -38,7 +36,8 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
+                        <li><a href="/accueil" >Accueil</a></li>
+                        <li><a href="/mes_reservation" >Mes méservations</a></li>
                     </ul>
                 </div>
             </div>
@@ -124,31 +123,40 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
                 <hr>
                 <div class="row">
-                    <p class="text-center"> <?= THE_COMMENT ?> </p>
                     <?php
-                    foreach ($getComment as $viewComment) {
-                        ?>
-                        <div class="comment">
-                            <p class="col-sm-10"><?= $viewComment->firstName ?> :</p>
-                            <p> <?= PUBLISH_DATE, date_format(date_create($viewComment->publishDate), 'd/m/Y') ?> </p>
-                            <div class="borderComment">
-                                <p> <?= $viewComment->content ?></p>
+                    if (!empty($getComment)) {
+                        foreach ($getComment as $viewComment) {
+                            ?>
+                            <p class="text-center"> <?= THE_COMMENT ?> </p>
+                            <div class="comment">
+                                <p class="col-sm-10"><?= $viewComment->firstName ?> :</p>
+                                <p> <?= PUBLISH_DATE, date_format(date_create($viewComment->publishDate), 'd/m/Y') ?> </p>
+                                <div class="borderComment">
+                                    <p> <?= $viewComment->content ?></p>
+                                </div>
+                                <?php
+                                if ($_SESSION['id'] == $viewComment->userId) {
+                                    ?>
+                                    <form action="myTaxiBooking.php" method="POST">
+                                        <input type="hidden" name="idComment" value="<?= $viewComment->id ?>"/>
+                                        <button type="submit" name="deleteComment" ><?= DELETE ?></button>
+                                    </form>
+                                    <?php
+                                }
+                                ?>
                             </div>
                             <?php
-                            if ($_SESSION['id'] == $viewComment->userId) {
-                                ?>
-                                <form action="myTaxiBooking.php" method="POST">
-                                    <input type="hidden" name="idComment" value="<?= $viewComment->id ?>"/>
-                                    <button type="submit" name="deleteComment" ><?= DELETE ?></button>
-                                </form>
-                                <?php
-                            }
-                            ?>
-                        </div>
+                        }
+                    } else {
+                        ?>
+                        <p class="text-center"> <?= NO_BOOKING ?></p>
                     <?php } ?>
                 </div>
             </div>
         </div>
         <?php include_once 'footer.php' ?>
+        <!-- Pour faire fonctionner la navbar en responsive -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>

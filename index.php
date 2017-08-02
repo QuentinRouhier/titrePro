@@ -27,14 +27,13 @@ include_once 'controller/indexController.php';
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
     </head>
     <body>
+        <?=        var_dump($_SESSION)?>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="navbar-header">
-                        <a class="navbar-brand" href="/accueil">
-                            <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
-                        </a>
-                    </div>
+                    <a class="navbar-brand" href="/accueil">
+                        <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
+                    </a>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -46,18 +45,17 @@ include_once 'controller/indexController.php';
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (!empty($_SESSION)) { ?> 
                             <?php if (!empty($_SESSION['id_taxi_group'] == 1)) { ?> 
-                                <a href="/agenda" class="btn btn-primary navbar-btn"><?= ORGANIZER ?></a>
+                                <li><a href="/agenda" ><?= ORGANIZER ?></a></li>
                             <?php } ?>
-                            <a href="/mes_reservation" title="Réservation" class="btn btn-default navbar-btn"><?= MY_BOOKING ?></a>
-                            <a href="/modification" class="btn btn-success navbar-btn"><?= EDIT ?></a>
-                            <a href="index.php?logOut" title="Se déconnecter" class="btn btn-warning navbar-btn"><?= LOG_OUT ?></a>
+                            <li><a href="/mes_reservation" title="Réservation" ><?= MY_BOOKING ?></a></li>
+                            <li><a href="/modification" ><?= EDIT ?></a></li>
+                            <li><a href="index.php?logOut" title="Se déconnecter" ><?= LOG_OUT ?></a></li>
                             <?php
                         } else {
                             ?>
-                            <a href="/register.php" class="btn btn-success navbar-btn"><?= SIGN_UP ?></a>
-                            <button data-toggle="modal" data-target="#ModalConnexion" class="btn btn-primary navbar-btn"><?= SIGN_IN ?></button>
-                        <?php }
-                        ?>
+                            <li><a href="/register.php" ><?= SIGN_UP ?></a></li>
+                            <li><a href="#" data-toggle="modal" data-target="#ModalConnexion" ><?= SIGN_IN ?></a></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

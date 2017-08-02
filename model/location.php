@@ -27,21 +27,42 @@ class location extends database {
      * passe en parametre la valeur de l'input de recherche.
      */
     public function getPostalCodeBySearch($search){
-        $queryResult = $this->pdo->prepare('SELECT `postalCode`,`id`,`city` FROM `taxi_location` WHERE `postalCode` LIKE :search');
+        $queryResult = $this->pdo->prepare('SELECT `postalCode`'
+                . ',`id`'
+                . ',`city` '
+                . 'FROM `taxi_location` '
+                . 'WHERE `postalCode` LIKE :search');
         $queryResult->bindValue(':search',$search.'%',PDO::PARAM_STR);
         $queryResult->execute();
         return $queryResult->fetchAll(PDO::FETCH_OBJ);
     }
-    public function getListLocation($locationId) {
-        $queryResult = $this->pdo->prepare('SELECT `t_lct`.`postalCode`,`t_lct`.`city` FROM `taxi_location` AS `t_lct` INNER JOIN `taxi_users` AS `t_usr` ON `t_lct`.`id` = `t_usr`.`id_taxi_location` WHERE `t_usr`.`id_taxi_location` = :locationId');
-        $queryResult->bindValue(':locationId',$locationId,PDO::PARAM_INT);
+    public function getListLocation() {
+        $queryResult = $this->pdo->prepare('SELECT `t_lct`.`postalCode`'
+                . ',`t_lct`.`city` '
+                . 'FROM `taxi_location` AS `t_lct` '
+                . 'INNER JOIN `taxi_users` '
+                . 'AS `t_usr` '
+                . 'ON `t_lct`.`id` = `t_usr`.`id_taxi_location` '
+                . 'WHERE `t_usr`.`id_taxi_location` = :postalCode');
+        $queryResult->bindValue(':postalCode', $this->postalCode, PDO::PARAM_INT);
         $queryResult->execute();
-        return $queryResult->fetch(PDO::FETCH_OBJ);
+        $search = $queryResult->fetch(PDO::FETCH_OBJ);
+        // La valeur de la ville retourner ans la valeur de la ville de l'objet
+        $this->city = $search->city;
+        // On appel la methode getPostalCodeBySearch() en cherchant avec le code postal trovuer utlerieurement
+        return $this->getPostalCodeBySearch($search->postalCode);
     }
-    // Quand on fait une reservation affiche les ville de la base de donner
+    // Quand on fait une reservation affiche les ville de la base de donner avec une limit de 10
     public function getLocation(){
-        $queryResult = $this->pdo->prepare('SELECT `postalCode`,`id`,`city` FROM `taxi_location` WHERE `city` LIKE :city ORDER BY `city` ASC LIMIT 0,10 ');
-        $queryResult->bindValue(':city',  $this->city.'%',PDO::PARAM_STR);
+        $queryResult = $this->pdo->prepare('SELECT `postalCode`'
+                . ',`id`'
+                . ',`city` '
+                . 'FROM `taxi_location` '
+                . 'WHERE `city` '
+                . 'LIKE :city '
+                . 'ORDER BY `city` ASC '
+                . 'LIMIT 0,10 ');
+        $queryResult->bindValue(':city',  $this->city.'%', PDO::PARAM_STR);
         $queryResult->execute();
         return $queryResult->fetchAll(PDO::FETCH_OBJ);
     }

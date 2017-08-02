@@ -23,11 +23,9 @@ include_once 'controller/bookingController.php';
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
-                    <div class="navbar-header">
                         <a class="navbar-brand" href="/accueil">
                             <img src="assets/images/logoTaxi.jpg" alt="logoTaxi" title="logoTaxi"/>
                         </a>
-                    </div>
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-burger">
                         <span class="sr-only">Toggle navigation</span>
                         <span class="icon-bar"></span>
@@ -37,7 +35,7 @@ include_once 'controller/bookingController.php';
                 </div>
                 <div class="collapse navbar-collapse" id="navbar-burger">
                     <ul class="nav navbar-nav navbar-right">
-                        <a href="/accueil" class="btn btn-success navbar-btn" >Accueil</a>
+                        <li><a href="/accueil" >Accueil</a></li>
                     </ul>
                 </div>
             </div>
@@ -57,6 +55,12 @@ include_once 'controller/bookingController.php';
                         <p class="control-label col-sm-4"><?= FIRST_NAME ?></p>
                         <div class="col-sm-8">
                             <p><?= $taxiList->firstName ?></p>
+                        </div>
+                    </div>
+                    <div class="row ">
+                        <p class="control-label col-sm-4"><?= POSTAL_CODE ?></p>
+                        <div class="col-sm-8">
+                            <p><?= $taxiList->postalCode ?></p>
                         </div>
                     </div>
                     <div class="row ">
@@ -84,5 +88,8 @@ include_once 'controller/bookingController.php';
             </div>
         </div>
         <?php include_once 'footer.php' ?>
+        <!-- Pour fair fonctionner la navbar en responsive -->
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     </body>
 </html>
