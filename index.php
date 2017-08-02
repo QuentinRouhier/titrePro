@@ -27,7 +27,6 @@ include_once 'controller/indexController.php';
         <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css">
     </head>
     <body>
-        <?=        var_dump($_SESSION)?>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">

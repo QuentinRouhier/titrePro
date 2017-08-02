@@ -42,6 +42,7 @@ include_once 'controller/taxiProfileController.php';
                 </div>
             </div>
         </nav>
+        <h1 class="text-center"><?= TAXI_PROFIL ?></h1>
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
                 <?= $message ?>

@@ -19,7 +19,6 @@ include_once 'controller/myBookingController.php';
         <link href="assets/css/style.css" rel="stylesheet" type="text/css"/>
     </head>
     <body>
-        <?=        var_dump($_SESSION)?>
         <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
@@ -40,6 +39,7 @@ include_once 'controller/myBookingController.php';
                 </div>
             </div>
         </nav>
+        <h1 class="text-center"><?= MY_BOOKING ?></h1>
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
                 <?php

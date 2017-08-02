@@ -136,7 +136,7 @@ include_once 'controller/registerController.php';
                             if (isset($_SESSION['id'])) {
                                 foreach ($locationsListt as $locationsDetails) {
                                     ?>
-                            <option value="<?= $locationsDetails->city ?>" <?= $_SESSION && $locationsDetails->city == $location->city ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
+                            <option value="<?= $locationsDetails->id ?>" <?= $_SESSION && $locationsDetails->city == $location->city ? 'selected' : '' ?>><?= $locationsDetails->city ?></option>
                                     <?php
                                 }
                             }

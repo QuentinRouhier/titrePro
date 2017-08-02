@@ -11,6 +11,6 @@ $getBookingById = $users->getBookingById();
 if (isset($_POST['viewProfile'])) {
     // on mets l'input idTaxi qui est hidden dans une variable de session idTaxi
     $_SESSION['idTaxi'] = strip_tags($_POST['idTaxi']);
-    header('location: myTaxiBooking.php');
+    header('location: /ma_reservation');
     exit;
 }

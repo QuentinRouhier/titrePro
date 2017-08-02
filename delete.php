@@ -45,8 +45,9 @@ include_once 'controller/deleteController.php';
                 </div>
             </div>
         </nav>
+        <?= var_dump($_SESSION) ?>
         <div class="container-fluid">
-            <h1 class="text-center"> Suppression de ton compte </h1>
+            <h1 class="text-center"> <?= DELETE_USER ?> </h1>
             <form action="delete.php" method="POST">
                 <div class="row form-group <?= (!empty($error)) ? 'has-error' : '' ?>">
                     <label class="control-label col-sm-offset-3  col-sm-2" for="password">tapez votre mot de passe :*</label>

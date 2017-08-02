@@ -42,10 +42,10 @@ include_once 'controller/myTaxiBookingController.php';
                 </div>
             </div>
         </nav>
+        <h1 class="text-center"><?= TAXI_PROFIL ?></h1>
         <div class="container-fluid">
             <div class="row col-lg-offset-2 col-sm-8 ">
                 <?php
-                var_dump($_SESSION);
                 foreach ($getCityPostalCodeAndTaxiById as $viewTaxi) {
                     ?>
                     <div class="row">
@@ -149,7 +149,7 @@ include_once 'controller/myTaxiBookingController.php';
                         }
                     } else {
                         ?>
-                        <p class="text-center"> <?= NO_BOOKING ?></p>
+                        <p class="text-center"> <?= NO_COMMENT ?></p>
                     <?php } ?>
                 </div>
             </div>
